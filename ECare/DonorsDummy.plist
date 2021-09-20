@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Donors</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>David De Gea</string>
+			<key>dept</key>
+			<string>F/W Design</string>
+			<key>bloodtype</key>
+			<string>A+</string>
+			<key>availabledonor</key>
+			<string>28-09-2021</string>
+			<key>updates</key>
+			<string>29-09-2021 13:00:40 WIB</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Raphael Varane</string>
+			<key>dept</key>
+			<string>PCB Design</string>
+			<key>bloodtype</key>
+			<string>AB+</string>
+			<key>availabledonor</key>
+			<string>30-09-2021</string>
+			<key>updates</key>
+			<string>29-09-2021 11:00:40 WIB</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Luke Shaw</string>
+			<key>dept</key>
+			<string>Electric Eng</string>
+			<key>bloodtype</key>
+			<string>O-</string>
+			<key>availabledonor</key>
+			<string>30-09-2021</string>
+			<key>updates</key>
+			<string>29-09-2021 10:00:40 WIB</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Paul Pogba</string>
+			<key>dept</key>
+			<string>E2 Production 1</string>
+			<key>bloodtype</key>
+			<string>B-</string>
+			<key>availabledonor</key>
+			<string>01-10-2021</string>
+			<key>updates</key>
+			<string>29-09-2021 09:00:40 WIB</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Anthony Martial</string>
+			<key>dept</key>
+			<string>E4 Production Eng</string>
+			<key>bloodtype</key>
+			<string>O-</string>
+			<key>availabledonor</key>
+			<string>27-09-2021</string>
+			<key>updates</key>
+			<string>29-09-2021 08:00:40 WIB</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Ole Gunnar Solskjaer</string>
+			<key>dept</key>
+			<string>F/W Design</string>
+			<key>bloodtype</key>
+			<string>A+</string>
+			<key>availabledonor</key>
+			<string>28-09-2021</string>
+			<key>updates</key>
+			<string>29-09-2021 07:00:40 WIB</string>
+		</dict>
+	</array>
+	<key>Request</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Mason Greenwood</string>
+			<key>dept</key>
+			<string>F/W Design</string>
+			<key>bloodtype</key>
+			<string>A+</string>
+			<key>status</key>
+			<string>Waiting</string>
+			<key>updates</key>
+			<string>28-09-2021 19:30:09</string>
+		</dict>
+	</array>
+</dict>
+</plist>

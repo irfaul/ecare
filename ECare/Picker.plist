@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Gender</key>
+	<array>
+		<string>Male</string>
+		<string>Female</string>
+	</array>
+	<key>Dept</key>
+	<array>
+		<string>IS Promotion</string>
+		<string>Accounting &amp; Finance</string>
+		<string>Automation Eng</string>
+		<string>Compliance &amp; Audit</string>
+		<string>Cost Control</string>
+		<string>CS QA</string>
+		<string>E2 Parts Warehouse</string>
+		<string>E2 Product Eng</string>
+		<string>E2 Production 1</string>
+		<string>E2 Production 2</string>
+		<string>Electric Eng</string>
+		<string>F/W Design</string>
+		<string>PCB Design</string>
+		<string>S/W Design</string>
+	</array>
+	<key>BloodType</key>
+	<array>
+		<string>A+</string>
+		<string>A-</string>
+		<string>B+</string>
+		<string>B-</string>
+		<string>AB+</string>
+		<string>AB-</string>
+		<string>O+</string>
+		<string>O-</string>
+	</array>
+</dict>
+</plist>

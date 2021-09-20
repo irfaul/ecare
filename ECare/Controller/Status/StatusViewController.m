@@ -6,6 +6,7 @@
 //
 
 #import "StatusViewController.h"
+#import "StatusDetailViewController.h"
 #import "ReqTableViewCell.h"
 #import "util.h"
 
@@ -121,11 +122,48 @@ CGFloat fSize3 = 13.0;
     cell.reqStatus.text = dict[@"status"];
     cell.reqUpdates.text = dict[@"updates"];
     
+    cell.btnCancelView.layer.masksToBounds = false;
+    cell.btnCancelView.layer.cornerRadius = 8.0;
+    
+    if([dict[@"status"] isEqual:@"Scheduled"] || [dict[@"status"] isEqual:@"Cancelled"]){
+        cell.btnCancelView.hidden = YES;
+    }
+    
+    if([dict[@"status"] isEqual:@"Waiting"]) {
+        cell.reqStatus.textColor = [UIColor darkGrayColor];
+    } else if([dict[@"status"] isEqual:@"Cancelled"]) {
+        cell.reqStatus.textColor = [UIColor redColor];
+    } else if([dict[@"status"] isEqual:@"Scheduled"]) {
+        cell.reqStatus.textColor = [UIColor colorWithRed:0.088 green:0.663 blue:0.318 alpha:1];
+    }
+    
     cell.cardView.layer.masksToBounds = false;
     cell.cardView.layer.cornerRadius = 15.0;
-    //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    StatusDetailViewController *detail = [[StatusDetailViewController alloc] init];
+    detail.delegate = self;
+    NSIndexPath *myIndexPath = [tableView indexPathForSelectedRow];
+    
+    NSDictionary *dict = reqData[myIndexPath.row];
+    
+    detail.detailModel = @[dict[@"name"],
+                           dict[@"dept"],
+                           dict[@"bloodtype"],
+                           dict[@"status"],
+                           dict[@"donordate"],
+                           dict[@"donorloc"],
+                           dict[@"donorsname"],
+                           dict[@"donorsdept"],
+                           dict[@"donorscp"],
+                           dict[@"notes"]];
+    
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:detail];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 

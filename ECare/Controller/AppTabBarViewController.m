@@ -38,8 +38,8 @@
     UINavigationController *fourthNav = [[UINavigationController alloc] initWithRootViewController:fourthController];
     
     firstNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage systemImageNamed:@"house"] tag:0];
-    secondNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Updates" image:[UIImage systemImageNamed:@"clock.arrow.circlepath"] tag:1];
-    thirdNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Status" image:[UIImage systemImageNamed:@"note.text"] tag:2];
+    secondNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Updates" image:[UIImage imageNamed:@"restore"] tag:1];
+    thirdNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Status" image:[UIImage imageNamed:@"assignment"] tag:2];
     fourthNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:[UIImage systemImageNamed:@"person.circle"] tag:3];
     
     self.viewControllers = [NSArray arrayWithObjects:firstNav, secondNav, thirdNav, fourthNav, nil];

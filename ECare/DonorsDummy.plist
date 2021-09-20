@@ -90,6 +90,66 @@
 			<string>Waiting</string>
 			<key>updates</key>
 			<string>28-09-2021 19:30:09</string>
+			<key>donordate</key>
+			<string>-</string>
+			<key>donorloc</key>
+			<string>-</string>
+			<key>donorsname</key>
+			<string>-</string>
+			<key>donorsdept</key>
+			<string>-</string>
+			<key>donorscp</key>
+			<string>6285155283220</string>
+			<key>notes</key>
+			<string>-</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Mason Greenwood</string>
+			<key>dept</key>
+			<string>F/W Design</string>
+			<key>bloodtype</key>
+			<string>A+</string>
+			<key>status</key>
+			<string>Cancelled</string>
+			<key>updates</key>
+			<string>28-09-2021 19:30:09</string>
+			<key>donordate</key>
+			<string>-</string>
+			<key>donorloc</key>
+			<string>-</string>
+			<key>donorsname</key>
+			<string>-</string>
+			<key>donorsdept</key>
+			<string>-</string>
+			<key>donorscp</key>
+			<string>6285155283220</string>
+			<key>notes</key>
+			<string>-</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Mason Greenwood</string>
+			<key>dept</key>
+			<string>F/W Design</string>
+			<key>bloodtype</key>
+			<string>A+</string>
+			<key>status</key>
+			<string>Scheduled</string>
+			<key>updates</key>
+			<string>28-09-2021 19:30:09</string>
+			<key>donordate</key>
+			<string>07-10-2021 19:30:09</string>
+			<key>donorloc</key>
+			<string>RS Enggal Waras</string>
+			<key>donorsname</key>
+			<string>Jesse Lingard</string>
+			<key>donorsdept</key>
+			<string>E2 Production 1</string>
+			<key>donorscp</key>
+			<string>6285155283220</string>
+			<key>notes</key>
+			<string>Segera hubungi pendonor untuk kelanjutan</string>
 		</dict>
 	</array>
 </dict>

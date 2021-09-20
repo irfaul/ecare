@@ -37,6 +37,8 @@
 		85F0A06F26F474750021A918 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F0A06E26F474750021A918 /* Assets.xcassets */; };
 		85F0A07926F47A740021A918 /* ReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F0A07726F47A740021A918 /* ReqTableViewCell.m */; };
 		85F0A07A26F47A740021A918 /* ReqTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85F0A07826F47A740021A918 /* ReqTableViewCell.xib */; };
+		85F90D0126F81F8100BBFDFD /* StatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F90CFF26F81F8100BBFDFD /* StatusDetailViewController.m */; };
+		85F90D0226F81F8100BBFDFD /* StatusDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85F90D0026F81F8100BBFDFD /* StatusDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,9 @@
 		85F0A07626F47A740021A918 /* ReqTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqTableViewCell.h; sourceTree = "<group>"; };
 		85F0A07726F47A740021A918 /* ReqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqTableViewCell.m; sourceTree = "<group>"; };
 		85F0A07826F47A740021A918 /* ReqTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReqTableViewCell.xib; sourceTree = "<group>"; };
+		85F90CFE26F81F8100BBFDFD /* StatusDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusDetailViewController.h; sourceTree = "<group>"; };
+		85F90CFF26F81F8100BBFDFD /* StatusDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusDetailViewController.m; sourceTree = "<group>"; };
+		85F90D0026F81F8100BBFDFD /* StatusDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +256,9 @@
 				85F0A07626F47A740021A918 /* ReqTableViewCell.h */,
 				85F0A07726F47A740021A918 /* ReqTableViewCell.m */,
 				85F0A07826F47A740021A918 /* ReqTableViewCell.xib */,
+				85F90CFE26F81F8100BBFDFD /* StatusDetailViewController.h */,
+				85F90CFF26F81F8100BBFDFD /* StatusDetailViewController.m */,
+				85F90D0026F81F8100BBFDFD /* StatusDetailViewController.xib */,
 			);
 			path = Status;
 			sourceTree = "<group>";
@@ -391,6 +399,7 @@
 				85E1B56526EEE85F0035CCEB /* Poppins-LightItalic.ttf in Resources */,
 				85E1B57626EF36010035CCEB /* ReqFormTableViewCell.xib in Resources */,
 				85E1B56626EEE85F0035CCEB /* Poppins-Bold.ttf in Resources */,
+				85F90D0226F81F8100BBFDFD /* StatusDetailViewController.xib in Resources */,
 				856E39E126F42E03003B1949 /* DonorsTableViewCell.xib in Resources */,
 				85F0A07A26F47A740021A918 /* ReqTableViewCell.xib in Resources */,
 				85E1B56426EEE85F0035CCEB /* Poppins-Light.ttf in Resources */,
@@ -430,6 +439,7 @@
 				856E39E026F42E03003B1949 /* DonorsTableViewCell.m in Sources */,
 				85E1B4BA26EED2840035CCEB /* AppDelegate.m in Sources */,
 				85B2414426F1B5EC006088A5 /* PickerViewController.m in Sources */,
+				85F90D0126F81F8100BBFDFD /* StatusDetailViewController.m in Sources */,
 				85E1B51D26EED6D00035CCEB /* ProfileViewController.m in Sources */,
 				85E1B4CB26EED2850035CCEB /* main.m in Sources */,
 				85E1B50E26EED6840035CCEB /* UpdatesViewController.m in Sources */,
@@ -606,7 +616,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QJRQR82NL5;
 				INFOPLIST_FILE = ECare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -625,7 +635,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QJRQR82NL5;
 				INFOPLIST_FILE = ECare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIColor *) secondaryColor;
 - (UIFont *) titleFont:(CGFloat *)fontSize;
 - (UIFont *) regularFont:(CGFloat *)fontSize;
+- (UIFont *) italicFont:(CGFloat *)fontSize;
 
 @end
 

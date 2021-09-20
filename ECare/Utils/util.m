@@ -29,4 +29,9 @@
     return regularFont;
 }
 
+- (UIFont *) italicFont:(CGFloat *)fontSize {
+    UIFont *italicFont = [UIFont fontWithName:@"Poppins-Italic" size:*fontSize];
+    return italicFont;
+}
+
 @end

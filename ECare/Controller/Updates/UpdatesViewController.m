@@ -7,6 +7,8 @@
 
 #import "UpdatesViewController.h"
 #import "DonorsTableViewCell.h"
+#import "DonorsDataModel.h"
+#import "DonorsDB.h"
 #import "util.h"
 
 @interface UpdatesViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -15,15 +17,15 @@
 
 @implementation UpdatesViewController
 
-@synthesize segmentedControl, donorsTableView;
+@synthesize segmentedControl, donorsTableView, items;
 
 NSString *cellDonorsId = @"cellDonorsId";
 UIView *cardInfo;
 UIImageView *logoDonors;
 UILabel *totalLabel;
 UILabel *countLabel;
-
 CGFloat fSize = 20.0;
+DonorsDB *donorsDB;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,15 +36,19 @@ CGFloat fSize = 20.0;
        NSFontAttributeName:[[util new] titleFont:&fSize]}];
     self.navigationController.navigationBar.barTintColor = [[util new] primaryColor];
     
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"DonorsDummy" ofType:@"plist"];
+//    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
+//
+//    donorsData = dict[@"Donors"];
     [self setInitComponent];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"DonorsDummy" ofType:@"plist"];
-    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
-    
-    donorsData = dict[@"Donors"];
-    
-    
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = NO;
+    donorsDB = [[DonorsDB alloc] init];
+    items = [donorsDB showAllDonorsData];
+}
+
 
 
 - (void)setInitComponent {
@@ -142,7 +148,8 @@ CGFloat fSize = 20.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return donorsData.count;
+    //return donorsData.count;
+    return items.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,23 +157,20 @@ CGFloat fSize = 20.0;
     return height;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.tabBar.hidden = NO;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     DonorsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDonorsId forIndexPath:indexPath];
-    
+    DonorsDataModel *item = items[indexPath.row];
     // Configure the cell...
     
-    NSDictionary *dict = donorsData[indexPath.row];
-    
-    cell.nameDonors.text = dict[@"name"];
-    cell.deptDonors.text = dict[@"dept"];
-    cell.bloodTypeDonors.text = dict[@"bloodtype"];
-    cell.availableDateDonors.text = dict[@"availabledonor"];
-    cell.updateDateLabel.text = dict[@"updates"];
+    //NSDictionary *dict = donorsData[indexPath.row];
+
+    cell.nameDonors.text = item.name;
+    cell.deptDonors.text = item.dept;
+    cell.bloodTypeDonors.text = item.bloodtype;
+    cell.availableDateDonors.text = item.available;
+    cell.updateDateLabel.text = item.submitdate;
     
     cell.cardView.layer.masksToBounds = false;
     cell.cardView.layer.cornerRadius = 15.0;
@@ -174,10 +178,5 @@ CGFloat fSize = 20.0;
     
     return cell;
 }
-
-
-
-
-
 
 @end

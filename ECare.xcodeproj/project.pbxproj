@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85258FBD26F9A650009C3794 /* DonorsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85258FBC26F9A650009C3794 /* DonorsDataModel.m */; };
+		85258FC326F9A9B2009C3794 /* DonorsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 85258FC226F9A9B2009C3794 /* DonorsDB.m */; };
+		85258FC926F9AA37009C3794 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 85258FC826F9AA25009C3794 /* libsqlite3.tbd */; };
 		85417BC226F07C470061A413 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85417BC126F07C470061A413 /* ItemTableCell.m */; };
 		856E39E026F42E03003B1949 /* DonorsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 856E39DE26F42E03003B1949 /* DonorsTableViewCell.m */; };
 		856E39E126F42E03003B1949 /* DonorsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 856E39DF26F42E03003B1949 /* DonorsTableViewCell.xib */; };
@@ -59,6 +62,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		85258FBB26F9A650009C3794 /* DonorsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsDataModel.h; sourceTree = "<group>"; };
+		85258FBC26F9A650009C3794 /* DonorsDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsDataModel.m; sourceTree = "<group>"; };
+		85258FC126F9A9B2009C3794 /* DonorsDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsDB.h; sourceTree = "<group>"; };
+		85258FC226F9A9B2009C3794 /* DonorsDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsDB.m; sourceTree = "<group>"; };
+		85258FC826F9AA25009C3794 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		85417BC026F07C470061A413 /* ItemTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
 		85417BC126F07C470061A413 /* ItemTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
 		856E39DD26F42E03003B1949 /* DonorsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsTableViewCell.h; sourceTree = "<group>"; };
@@ -119,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85258FC926F9AA37009C3794 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +148,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85258FC726F9AA24009C3794 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85258FC826F9AA25009C3794 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		85E1B4AC26EED2840035CCEB = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +163,7 @@
 				85E1B4D326EED2850035CCEB /* ECareTests */,
 				85E1B4DE26EED2850035CCEB /* ECareUITests */,
 				85E1B4B626EED2840035CCEB /* Products */,
+				85258FC726F9AA24009C3794 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,6 +234,10 @@
 			children = (
 				85417BC026F07C470061A413 /* ItemTableCell.h */,
 				85417BC126F07C470061A413 /* ItemTableCell.m */,
+				85258FBB26F9A650009C3794 /* DonorsDataModel.h */,
+				85258FBC26F9A650009C3794 /* DonorsDataModel.m */,
+				85258FC126F9A9B2009C3794 /* DonorsDB.h */,
+				85258FC226F9A9B2009C3794 /* DonorsDB.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -438,9 +460,11 @@
 				85E1B52726EEDEDF0035CCEB /* util.m in Sources */,
 				856E39E026F42E03003B1949 /* DonorsTableViewCell.m in Sources */,
 				85E1B4BA26EED2840035CCEB /* AppDelegate.m in Sources */,
+				85258FBD26F9A650009C3794 /* DonorsDataModel.m in Sources */,
 				85B2414426F1B5EC006088A5 /* PickerViewController.m in Sources */,
 				85F90D0126F81F8100BBFDFD /* StatusDetailViewController.m in Sources */,
 				85E1B51D26EED6D00035CCEB /* ProfileViewController.m in Sources */,
+				85258FC326F9A9B2009C3794 /* DonorsDB.m in Sources */,
 				85E1B4CB26EED2850035CCEB /* main.m in Sources */,
 				85E1B50E26EED6840035CCEB /* UpdatesViewController.m in Sources */,
 				85E1B50726EED64A0035CCEB /* HomeViewController.m in Sources */,

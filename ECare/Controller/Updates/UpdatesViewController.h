@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, retain) UISegmentedControl *segmentedControl;
 @property(nonatomic, retain) UITableView *donorsTableView;
+@property (nonatomic) NSMutableArray *items;
 
 @end
 

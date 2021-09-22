@@ -9,13 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UpdatesViewController : UIViewController {
-    NSMutableArray *donorsData;
-}
+@interface UpdatesViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, retain) UISegmentedControl *segmentedControl;
-@property(nonatomic, retain) UITableView *donorsTableView;
-@property (nonatomic) NSMutableArray *items;
+@property(strong, nonatomic) UITableView *tableView;
+@property(strong, nonatomic)NSMutableArray *arrMainData;
+@property(strong, nonatomic)NSString *countResult;
 
 @end
 

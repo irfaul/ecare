@@ -6,83 +6,95 @@
 //
 
 #import "DonorsDB.h"
-#import "DonorsDataModel.h"
 #import <sqlite3.h>
 
 @implementation DonorsDB
 
-@synthesize strPath;
 @synthesize arrdata,strmain;
 
-char *errMsg;
 
 -(id)init{
 
-    strPath = @"/Users/iei19100004/Desktop/CalculatorPaul/ecare.db";
+    appdel = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    const char *dbPath = [strPath UTF8String];
-
-    if ([[NSFileManager defaultManager]fileExistsAtPath:strPath] == YES) {
-        NSLog(@"File found");
-        if (sqlite3_open(dbPath, &_donorsDB) == SQLITE_OK) {
-
-            NSString *createDonorsTable = @"CREATE TABLE IF NOT EXISTS donors(donorsid INTEGER PRIMARY KEY AUTOINCREMENT, userid TEXT, name TEXT, dept TEXT, bloodtype TEXT, gender TEXT, age TEXT, contactperson TEXT, available TEXT, submitdate TEXT)";
-
-            if (sqlite3_exec(_donorsDB, [createDonorsTable UTF8String], NULL, NULL, &errMsg) == SQLITE_OK) {
-                NSLog(@"TABEL CREATED");
-            } else {
-                NSLog(@"Error while creating table : %s", errMsg);
-            }
-            sqlite3_close(_donorsDB);
-        } else {
-            NSLog(@"Failed to open database file");
-        }
-    } else {
-        NSLog(@"File not found");
-
-        //create a new database if not found
-        [[NSFileManager defaultManager] createFileAtPath:strPath contents:NULL attributes:NULL];
-    }
+    strmain = appdel.strPath;
+    
     return  self;
 }
 
--(NSMutableArray *)showAllDonorsData {
-    //strPath = @"/Users/iei19100004/Desktop/CalculatorPaul/ecare.db";
+-(NSMutableArray *)showAllDonorsData:(NSString *)query {
+    arrdata = [[NSMutableArray alloc]init];
     
-    NSMutableArray *retArr = [[NSMutableArray alloc] init];
-    sqlite3_stmt *statement;
-    const char *dbPath = [strPath UTF8String];
-    
-    if(sqlite3_open(dbPath, &_donorsDB) == SQLITE_OK) {
-        NSString *strShow = @"select * from donors";
+    //open
+    if (sqlite3_open([strmain UTF8String], &database) == SQLITE_OK) {
+        sqlite3_stmt *connection;
         
-        const char *query = [strShow UTF8String];
-        
-        if(sqlite3_prepare_v2(_donorsDB, query, -1, &statement, NULL) == SQLITE_OK){
+        //prepare
+        if(sqlite3_prepare_v2(database, [query UTF8String], -1, &connection, nil) == SQLITE_OK){
             
-            while (sqlite3_step(statement) == SQLITE_ROW) {
-                DonorsDataModel *donors = [[DonorsDataModel alloc] init];
-                donors.donorsId = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)] intValue];
-                donors.userId = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                donors.name = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                donors.dept = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                donors.bloodtype = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                donors.gender = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                donors.age = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                donors.contactperson = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                donors.available = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                donors.submitdate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                [retArr addObject:donors];
-                donors = nil;
+            //setup
+            while (sqlite3_step(connection) == SQLITE_ROW) {
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+                
+                NSString *name = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 2)];
+                
+                NSString *dept = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 3)];
+                
+                NSString *bloodtype = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 4)];
+                
+                NSString *gender = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 5)];
+                
+                NSString *age = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 6)];
+                
+                NSString *contactperson = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 7)];
+                
+                NSString *available = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 8)];
+                
+                NSString *submitdate = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 9)];
+                
+                [dict setObject:name forKey:@"name"];
+                [dict setObject:dept forKey:@"dept"];
+                [dict setObject:bloodtype forKey:@"bloodtype"];
+                [dict setObject:gender forKey:@"gender"];
+                [dict setObject:age forKey:@"age"];
+                [dict setObject:contactperson forKey:@"contactperson"];
+                [dict setObject:available forKey:@"available"];
+                [dict setObject:submitdate forKey:@"submitdate"];
+                
+                [arrdata addObject:dict];
             }
-        } else { NSLog(@"Error get data"); }
-        
-        sqlite3_finalize(statement);
+            NSLog(@"db oke");
+        }
+        sqlite3_finalize(connection);
     }
     
-    sqlite3_close(_donorsDB);
+    sqlite3_close(database);
     
-    return retArr;
+    return arrdata;
+}
+
+-(NSString *)countData:(NSString *)query {
+    NSString *result;
+    //open
+    if (sqlite3_open([strmain UTF8String], &database) == SQLITE_OK) {
+        sqlite3_stmt *connection;
+        
+        //prepare
+        if(sqlite3_prepare_v2(database, [query UTF8String], -1, &connection, nil) == SQLITE_OK){
+            
+            //setup
+            while (sqlite3_step(connection) == SQLITE_ROW) {
+                
+                result = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 0)];
+            }
+            NSLog(@"db oke");
+        }
+        sqlite3_finalize(connection);
+    }
+    
+    sqlite3_close(database);
+    
+    return result;
 }
 
 @end

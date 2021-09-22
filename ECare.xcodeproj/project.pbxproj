@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85258FBD26F9A650009C3794 /* DonorsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85258FBC26F9A650009C3794 /* DonorsDataModel.m */; };
 		85258FC326F9A9B2009C3794 /* DonorsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 85258FC226F9A9B2009C3794 /* DonorsDB.m */; };
 		85258FC926F9AA37009C3794 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 85258FC826F9AA25009C3794 /* libsqlite3.tbd */; };
 		85417BC226F07C470061A413 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85417BC126F07C470061A413 /* ItemTableCell.m */; };
@@ -63,8 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		85258FBB26F9A650009C3794 /* DonorsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsDataModel.h; sourceTree = "<group>"; };
-		85258FBC26F9A650009C3794 /* DonorsDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsDataModel.m; sourceTree = "<group>"; };
 		85258FC126F9A9B2009C3794 /* DonorsDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsDB.h; sourceTree = "<group>"; };
 		85258FC226F9A9B2009C3794 /* DonorsDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsDB.m; sourceTree = "<group>"; };
 		85258FC826F9AA25009C3794 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -258,8 +255,6 @@
 			children = (
 				85417BC026F07C470061A413 /* ItemTableCell.h */,
 				85417BC126F07C470061A413 /* ItemTableCell.m */,
-				85258FBB26F9A650009C3794 /* DonorsDataModel.h */,
-				85258FBC26F9A650009C3794 /* DonorsDataModel.m */,
 				85258FC126F9A9B2009C3794 /* DonorsDB.h */,
 				85258FC226F9A9B2009C3794 /* DonorsDB.m */,
 			);
@@ -472,7 +467,6 @@
 				85E1B52726EEDEDF0035CCEB /* util.m in Sources */,
 				856E39E026F42E03003B1949 /* DonorsTableViewCell.m in Sources */,
 				85E1B4BA26EED2840035CCEB /* AppDelegate.m in Sources */,
-				85258FBD26F9A650009C3794 /* DonorsDataModel.m in Sources */,
 				85B2414426F1B5EC006088A5 /* PickerViewController.m in Sources */,
 				85F90D0126F81F8100BBFDFD /* StatusDetailViewController.m in Sources */,
 				85E1B51D26EED6D00035CCEB /* ProfileViewController.m in Sources */,

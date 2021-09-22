@@ -15,6 +15,7 @@
 		856E39E126F42E03003B1949 /* DonorsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 856E39DF26F42E03003B1949 /* DonorsTableViewCell.xib */; };
 		85B2414426F1B5EC006088A5 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B2414326F1B5EC006088A5 /* PickerViewController.m */; };
 		85B2414926F1B636006088A5 /* Picker.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85B2414826F1B636006088A5 /* Picker.plist */; };
+		85D5DDBB26FACEA100909149 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D5DDBA26FACEA100909149 /* Assets.xcassets */; };
 		85E1B4BA26EED2840035CCEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B4B926EED2840035CCEB /* AppDelegate.m */; };
 		85E1B4BD26EED2840035CCEB /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B4BC26EED2840035CCEB /* SceneDelegate.m */; };
 		85E1B4C826EED2850035CCEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E1B4C626EED2850035CCEB /* LaunchScreen.storyboard */; };
@@ -37,7 +38,6 @@
 		85E1B57526EF36010035CCEB /* ReqFormTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B57326EF36010035CCEB /* ReqFormTableViewCell.m */; };
 		85E1B57626EF36010035CCEB /* ReqFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E1B57426EF36010035CCEB /* ReqFormTableViewCell.xib */; };
 		85EE06CB26F43A4300343EF5 /* DonorsDummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85EE06CA26F43A4300343EF5 /* DonorsDummy.plist */; };
-		85F0A06F26F474750021A918 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85F0A06E26F474750021A918 /* Assets.xcassets */; };
 		85F0A07926F47A740021A918 /* ReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F0A07726F47A740021A918 /* ReqTableViewCell.m */; };
 		85F0A07A26F47A740021A918 /* ReqTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85F0A07826F47A740021A918 /* ReqTableViewCell.xib */; };
 		85F90D0126F81F8100BBFDFD /* StatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F90CFF26F81F8100BBFDFD /* StatusDetailViewController.m */; };
@@ -75,6 +75,7 @@
 		85B2414226F1B5EC006088A5 /* PickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
 		85B2414326F1B5EC006088A5 /* PickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
 		85B2414826F1B636006088A5 /* Picker.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Picker.plist; sourceTree = "<group>"; };
+		85D5DDBA26FACEA100909149 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85E1B4B526EED2840035CCEB /* ECare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E1B4B826EED2840035CCEB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		85E1B4B926EED2840035CCEB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -113,7 +114,6 @@
 		85E1B57326EF36010035CCEB /* ReqFormTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqFormTableViewCell.m; sourceTree = "<group>"; };
 		85E1B57426EF36010035CCEB /* ReqFormTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReqFormTableViewCell.xib; sourceTree = "<group>"; };
 		85EE06CA26F43A4300343EF5 /* DonorsDummy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DonorsDummy.plist; sourceTree = "<group>"; };
-		85F0A06E26F474750021A918 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		85F0A07626F47A740021A918 /* ReqTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqTableViewCell.h; sourceTree = "<group>"; };
 		85F0A07726F47A740021A918 /* ReqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqTableViewCell.m; sourceTree = "<group>"; };
 		85F0A07826F47A740021A918 /* ReqTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReqTableViewCell.xib; sourceTree = "<group>"; };
@@ -187,8 +187,8 @@
 				85E1B4B926EED2840035CCEB /* AppDelegate.m */,
 				85E1B4BB26EED2840035CCEB /* SceneDelegate.h */,
 				85E1B4BC26EED2840035CCEB /* SceneDelegate.m */,
-				85F0A06E26F474750021A918 /* Assets.xcassets */,
 				85E1B4C626EED2850035CCEB /* LaunchScreen.storyboard */,
+				85D5DDBA26FACEA100909149 /* Assets.xcassets */,
 				85E1B55C26EEE82A0035CCEB /* fonts */,
 				85E1B4C926EED2850035CCEB /* Info.plist */,
 				85EE06CA26F43A4300343EF5 /* DonorsDummy.plist */,
@@ -422,6 +422,7 @@
 				85E1B57626EF36010035CCEB /* ReqFormTableViewCell.xib in Resources */,
 				85E1B56626EEE85F0035CCEB /* Poppins-Bold.ttf in Resources */,
 				85F90D0226F81F8100BBFDFD /* StatusDetailViewController.xib in Resources */,
+				85D5DDBB26FACEA100909149 /* Assets.xcassets in Resources */,
 				856E39E126F42E03003B1949 /* DonorsTableViewCell.xib in Resources */,
 				85F0A07A26F47A740021A918 /* ReqTableViewCell.xib in Resources */,
 				85E1B56426EEE85F0035CCEB /* Poppins-Light.ttf in Resources */,
@@ -430,7 +431,6 @@
 				85E1B56326EEE85F0035CCEB /* Poppins-Italic.ttf in Resources */,
 				85E1B56826EEE85F0035CCEB /* Poppins-SemiBold.ttf in Resources */,
 				85E1B56726EEE85F0035CCEB /* Poppins-Regular.ttf in Resources */,
-				85F0A06F26F474750021A918 /* Assets.xcassets in Resources */,
 				85B2414926F1B636006088A5 /* Picker.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

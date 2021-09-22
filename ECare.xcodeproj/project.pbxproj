@@ -22,6 +22,7 @@
 		85D5DDDB26FAD02A00909149 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D5DDD526FAD02A00909149 /* Poppins-SemiBold.ttf */; };
 		85D5DDDC26FAD02A00909149 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D5DDD626FAD02A00909149 /* Poppins-Bold.ttf */; };
 		85D5DDDD26FAD02A00909149 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D5DDD726FAD02A00909149 /* Poppins-Italic.ttf */; };
+		85D5DDE326FAD1ED00909149 /* ecare.db in Resources */ = {isa = PBXBuildFile; fileRef = 85D5DDE226FAD1ED00909149 /* ecare.db */; };
 		85E1B4BA26EED2840035CCEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B4B926EED2840035CCEB /* AppDelegate.m */; };
 		85E1B4BD26EED2840035CCEB /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B4BC26EED2840035CCEB /* SceneDelegate.m */; };
 		85E1B4C826EED2850035CCEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85E1B4C626EED2850035CCEB /* LaunchScreen.storyboard */; };
@@ -82,6 +83,7 @@
 		85D5DDD526FAD02A00909149 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		85D5DDD626FAD02A00909149 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		85D5DDD726FAD02A00909149 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		85D5DDE226FAD1ED00909149 /* ecare.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ecare.db; sourceTree = "<group>"; };
 		85E1B4B526EED2840035CCEB /* ECare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85E1B4B826EED2840035CCEB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		85E1B4B926EED2840035CCEB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -169,6 +171,14 @@
 			path = font;
 			sourceTree = "<group>";
 		};
+		85D5DDE126FAD1C500909149 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85D5DDE226FAD1ED00909149 /* ecare.db */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		85E1B4AC26EED2840035CCEB = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +203,7 @@
 		85E1B4B726EED2840035CCEB /* ECare */ = {
 			isa = PBXGroup;
 			children = (
+				85D5DDE126FAD1C500909149 /* Resources */,
 				85E1B52426EEDEA40035CCEB /* Utils */,
 				85E1B4F426EED4420035CCEB /* Model */,
 				85E1B4F326EED4390035CCEB /* Controller */,
@@ -431,6 +442,7 @@
 				85B2414926F1B636006088A5 /* Picker.plist in Resources */,
 				85D5DDDB26FAD02A00909149 /* Poppins-SemiBold.ttf in Resources */,
 				85D5DDD926FAD02A00909149 /* Poppins-Regular.ttf in Resources */,
+				85D5DDE326FAD1ED00909149 /* ecare.db in Resources */,
 				85D5DDDA26FAD02A00909149 /* Poppins-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

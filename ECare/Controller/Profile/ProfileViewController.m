@@ -40,6 +40,7 @@ CGFloat fSize5 = 15.0;
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[[util new] titleFont:&fSize1]}];
     self.navigationController.navigationBar.barTintColor = [[util new] primaryColor];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     [self setInitComponent];
 }

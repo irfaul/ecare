@@ -35,6 +35,7 @@ DonorsDB *donorsDB;
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[[util new] titleFont:&fSize]}];
     self.navigationController.navigationBar.barTintColor = [[util new] primaryColor];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"DonorsDummy" ofType:@"plist"];
 //    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
@@ -42,6 +43,10 @@ DonorsDB *donorsDB;
 //    donorsData = dict[@"Donors"];
     [self setInitComponent];
 }
+
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//}
 
 - (void)viewWillAppear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;

@@ -24,7 +24,6 @@ UIButton *btnReq;
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
-    //self.navigationController.navigationBar.barStyle = UIStatusBarStyleDarkContent;
     
     [self setInitComponent];
 }

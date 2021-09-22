@@ -23,7 +23,7 @@ UIView *cardInfo;
 UIImageView *logoDonors;
 UILabel *totalLabel;
 UILabel *countLabel;
-CGFloat fSize = 20.0;
+CGFloat fSize = 17.0;
 DonorsDB *db;
 
 - (void)viewDidLoad {

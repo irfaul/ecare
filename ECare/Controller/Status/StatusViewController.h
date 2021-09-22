@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @property(nonatomic, retain) UITableView *reqTableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 

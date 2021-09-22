@@ -16,13 +16,11 @@
 
 @implementation StatusViewController
 
-@synthesize reqTableView;
+@synthesize reqTableView, refreshControl;
 
 NSString *cellReqId = @"cellDonorsId";
-UIButton *btnRefresh;
-UILabel *refreshLabel;
 UIStackView *stackViewBtnRefresh;
-CGFloat fSize2 = 20.0;
+CGFloat fSize2 = 17.0;
 CGFloat fSize3 = 13.0;
 
 - (void)viewDidLoad {
@@ -44,28 +42,6 @@ CGFloat fSize3 = 13.0;
 }
 
 - (void)setInitComponent {
-    btnRefresh = [[UIButton alloc] init];
-    [btnRefresh setBackgroundColor:[UIColor whiteColor]];
-    [btnRefresh setImage:[UIImage imageNamed:@"replay"] forState:UIControlStateNormal];
-    
-    refreshLabel = [[UILabel alloc] init];
-    refreshLabel.text = @"Refresh";
-    refreshLabel.font = [[util new] titleFont:&fSize3];
-    refreshLabel.textColor = [UIColor grayColor];
-    refreshLabel.adjustsFontSizeToFitWidth = YES;
-    refreshLabel.textAlignment = NSTextAlignmentCenter;
-    
-    //StackView Donors Button
-    stackViewBtnRefresh = [[UIStackView alloc] init];
-    
-    stackViewBtnRefresh.axis = UILayoutConstraintAxisVertical;
-    stackViewBtnRefresh.distribution = UIStackViewDistributionEqualSpacing;
-    stackViewBtnRefresh.alignment = UIStackViewAlignmentCenter;
-    stackViewBtnRefresh.spacing = 0;
-    
-    [stackViewBtnRefresh addArrangedSubview:btnRefresh];
-    [stackViewBtnRefresh addArrangedSubview:refreshLabel];
-    
     reqTableView = [[UITableView alloc] init];
     reqTableView.delegate = self;
     reqTableView.dataSource = self;
@@ -75,22 +51,27 @@ CGFloat fSize3 = 13.0;
     //reqTableView.rowHeight = 100;
     [reqTableView registerNib:[UINib nibWithNibName:@"ReqTableViewCell" bundle:nil] forCellReuseIdentifier:cellReqId];
     
-    [self.view addSubview:stackViewBtnRefresh];
+    refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Pull To Refresh"];
+    [refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [reqTableView addSubview:refreshControl];
+
     [self.view addSubview:reqTableView];
     
     [self setConstraint];
 }
 
+-(void)refreshData {
+       // Wait 1 sec before ending refreshing for testing
+       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+           [self.reqTableView reloadData];
+           [self.refreshControl endRefreshing];
+       });
+}
+
 - (void)setConstraint {
-    stackViewBtnRefresh.translatesAutoresizingMaskIntoConstraints = NO;
-    [btnRefresh.widthAnchor constraintEqualToConstant:80].active = YES;
-    [btnRefresh.heightAnchor constraintEqualToConstant:32].active = YES;
-    
-    [stackViewBtnRefresh.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [stackViewBtnRefresh.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10].active = YES;
-    
     reqTableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [reqTableView.topAnchor constraintEqualToAnchor:stackViewBtnRefresh.bottomAnchor constant:10].active = YES;
+    [reqTableView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10].active = YES;
     [reqTableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
     [reqTableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:10].active = YES;
     [reqTableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-10].active = YES;
@@ -126,6 +107,8 @@ CGFloat fSize3 = 13.0;
     cell.btnCancelView.layer.masksToBounds = false;
     cell.btnCancelView.layer.cornerRadius = 8.0;
     
+    [cell.btnCancelView addTarget:self action:@selector(btnCancelUpdate:) forControlEvents:UIControlEventTouchUpInside];
+    
     if([dict[@"status"] isEqual:@"Scheduled"] || [dict[@"status"] isEqual:@"Cancelled"]){
         cell.btnCancelView.hidden = YES;
     }
@@ -143,6 +126,8 @@ CGFloat fSize3 = 13.0;
     
     return cell;
 }
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     StatusDetailViewController *detail = [[StatusDetailViewController alloc] init];
@@ -165,6 +150,34 @@ CGFloat fSize3 = 13.0;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:detail];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)btnCancelUpdate:(UIButton *) sender{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Do you want to do this action ?"
+                                 message:@"You cannot undo this action."
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    
+    UIAlertAction* okButton = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                    [self dismissViewControllerAnimated:YES completion:nil];
+                               }];
+    
+    UIAlertAction* cancelButton = [UIAlertAction
+                               actionWithTitle:@"Cancel"
+                               style:UIAlertActionStyleCancel
+                               handler:^(UIAlertAction * action) {
+                                    [self dismissViewControllerAnimated:YES completion:nil];
+                               }];
+    
+    [alert addAction:okButton];
+    [alert addAction:cancelButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

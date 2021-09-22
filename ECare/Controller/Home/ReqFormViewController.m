@@ -56,6 +56,7 @@ ReqFormTableViewCell *cell;
     formTableView.showsHorizontalScrollIndicator = NO;
     formTableView.showsVerticalScrollIndicator = NO;
     [formTableView registerNib:[UINib nibWithNibName:@"ReqFormTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdStatic];
+    formTableView.alwaysBounceVertical = NO;
     
     itemTable = [[ItemTableCell alloc] init];
     cell.formDesc.delegate = self;

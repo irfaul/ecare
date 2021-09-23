@@ -8,20 +8,22 @@
 #import "StatusViewController.h"
 #import "StatusDetailViewController.h"
 #import "ReqTableViewCell.h"
+#import "DonorsDB.h"
 #import "util.h"
 
-@interface StatusViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface StatusViewController ()
 
 @end
 
 @implementation StatusViewController
 
-@synthesize reqTableView, refreshControl;
+@synthesize reqTableView, refreshControl, arrMainData;
 
 NSString *cellReqId = @"cellDonorsId";
 UIStackView *stackViewBtnRefresh;
 CGFloat fSize2 = 17.0;
 CGFloat fSize3 = 13.0;
+DonorsDB *dbreq;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,11 +36,17 @@ CGFloat fSize3 = 13.0;
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     [self setInitComponent];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"DonorsDummy" ofType:@"plist"];
-    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080024'"];
     
-    reqData = dict[@"Request"];
+    dbreq = [[DonorsDB alloc]init];
+    arrMainData = [[NSMutableArray alloc]init];
+    arrMainData = [dbreq showReqData:strShow];
+    
+    [reqTableView reloadData];
 }
 
 - (void)setInitComponent {
@@ -87,7 +95,7 @@ CGFloat fSize3 = 13.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return reqData.count;
+    return arrMainData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,29 +103,29 @@ CGFloat fSize3 = 13.0;
     ReqTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReqId forIndexPath:indexPath];
     
     // Configure the cell...
+    NSString *statusReq = [[NSString alloc] init];
+    statusReq = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"reqstatus"];
     
-    NSDictionary *dict = reqData[indexPath.row];
-    
-    cell.reqName.text = dict[@"name"];
-    cell.reqDept.text = dict[@"dept"];
-    cell.reqBloodType.text = dict[@"bloodtype"];
-    cell.reqStatus.text = dict[@"status"];
-    cell.reqUpdates.text = dict[@"updates"];
+    cell.reqName.text = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"name"];
+    cell.reqDept.text = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"dept"];
+    cell.reqBloodType.text = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"bloodtype"];
+    cell.reqStatus.text = statusReq;
+    cell.reqUpdates.text = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"submitdate"];
     
     cell.btnCancelView.layer.masksToBounds = false;
     cell.btnCancelView.layer.cornerRadius = 8.0;
     
     [cell.btnCancelView addTarget:self action:@selector(btnCancelUpdate:) forControlEvents:UIControlEventTouchUpInside];
     
-    if([dict[@"status"] isEqual:@"Scheduled"] || [dict[@"status"] isEqual:@"Cancelled"]){
+    if([statusReq isEqual:@"Scheduled"] || [statusReq isEqual:@"Cancelled"]){
         cell.btnCancelView.hidden = YES;
     }
     
-    if([dict[@"status"] isEqual:@"Waiting"]) {
+    if([statusReq isEqual:@"Waiting"]) {
         cell.reqStatus.textColor = [UIColor darkGrayColor];
-    } else if([dict[@"status"] isEqual:@"Cancelled"]) {
+    } else if([statusReq isEqual:@"Cancelled"]) {
         cell.reqStatus.textColor = [UIColor redColor];
-    } else if([dict[@"status"] isEqual:@"Scheduled"]) {
+    } else if([statusReq isEqual:@"Scheduled"]) {
         cell.reqStatus.textColor = [UIColor colorWithRed:0.088 green:0.663 blue:0.318 alpha:1];
     }
     
@@ -134,18 +142,18 @@ CGFloat fSize3 = 13.0;
     detail.delegate = self;
     NSIndexPath *myIndexPath = [tableView indexPathForSelectedRow];
     
-    NSDictionary *dict = reqData[myIndexPath.row];
+//    NSDictionary *dict = reqData[myIndexPath.row];
     
-    detail.detailModel = @[dict[@"name"],
-                           dict[@"dept"],
-                           dict[@"bloodtype"],
-                           dict[@"status"],
-                           dict[@"donordate"],
-                           dict[@"donorloc"],
-                           dict[@"donorsname"],
-                           dict[@"donorsdept"],
-                           dict[@"donorscp"],
-                           dict[@"notes"]];
+    detail.detailModel = @[[[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"name"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"dept"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"bloodtype"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"reqstatus"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"donordate"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"donorloc"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"donorsname"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"donorsdept"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"donorscp"],
+                           [[arrMainData objectAtIndex:myIndexPath.row]objectForKey:@"notes"]];
     
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:detail];

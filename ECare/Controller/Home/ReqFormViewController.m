@@ -32,6 +32,7 @@ NSArray *array;
 int sizeExpandDate = 330;
 ItemTableCell *itemTable;
 ReqFormTableViewCell *cell;
+UIGestureRecognizer *tapper;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,6 +58,12 @@ ReqFormTableViewCell *cell;
     formTableView.showsVerticalScrollIndicator = NO;
     [formTableView registerNib:[UINib nibWithNibName:@"ReqFormTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdStatic];
     formTableView.alwaysBounceVertical = NO;
+    formTableView.bounces = NO;
+    
+    tapper = [[UITapGestureRecognizer alloc]
+                    initWithTarget:self action:@selector(handleSingleTap:)];
+        tapper.cancelsTouchesInView = NO;
+        [self.view addGestureRecognizer:tapper];
     
     itemTable = [[ItemTableCell alloc] init];
     cell.formDesc.delegate = self;
@@ -71,13 +78,19 @@ ReqFormTableViewCell *cell;
     datePicker.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
-- (void)hideKeyboard {
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender
+{
     [self.view endEditing:YES];
 }
 
 - (void)showDatePickerCell {
     datePickerVisible = YES;
+    
+    //Create the index path where we insert the cell with the picker
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+    
     [formTableView beginUpdates];
+    [formTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [formTableView endUpdates];
     datePicker.alpha = 0.0f;
     [UIView animateWithDuration:0.25
@@ -91,7 +104,12 @@ ReqFormTableViewCell *cell;
 
 - (void)hideDatePickerCell {
     datePickerVisible = NO;
+    
+    //Create the index path where we insert the cell with the picker
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
     [formTableView beginUpdates];
+    //Delete the picker row
+    [formTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [formTableView endUpdates];
     [UIView animateWithDuration:0.25
                      animations:^{
@@ -145,7 +163,11 @@ ReqFormTableViewCell *cell;
     if (section == 0) {
         return 7;
     } else if(section == 1) {
-        return 2;
+        if (datePickerVisible) {
+            return 2;
+        } else {
+            return 1;
+        }
     } else if (section == 2) {
         return 1;
     }
@@ -208,16 +230,6 @@ ReqFormTableViewCell *cell;
     }
 }
 
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
-            [textView resignFirstResponder];
-            return NO;
-        }
-
-    return YES;
-}
-
 - (void)textViewDidChange:(UITextView *)textView {
     descText = textView.text;
     NSLog(@"userInput %@", descText);
@@ -251,7 +263,7 @@ ReqFormTableViewCell *cell;
             [cell configurePicker:itemTable];
         }
         if (indexPath.row == 4) {
-            cell.formTextField.delegate = self;
+            //cell.formTextField.delegate = self;
             [cell configureCell:UIKeyboardTypeNumberPad];
             [cell.formTextField addTarget:self action:@selector(textFieldDidChangeAgeText:) forControlEvents:UIControlEventEditingChanged];
             if (ageText.length == 0 || [ageText isEqual:@""]) {
@@ -298,7 +310,6 @@ ReqFormTableViewCell *cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self hideKeyboard];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         
@@ -325,9 +336,9 @@ ReqFormTableViewCell *cell;
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             if (datePickerVisible){
-                    [self hideDatePickerCell];
+                [self hideDatePickerCell];
             } else {
-                    [self showDatePickerCell];
+                [self showDatePickerCell];
             }
         }
     }

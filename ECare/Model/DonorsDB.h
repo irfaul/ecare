@@ -17,13 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
     sqlite3 *database;
 }
 
-//@property(strong, nonatomic) NSString *strPath;
-//@property(nonatomic) sqlite3 *donorsDB;
-
 -(NSMutableArray*)showAllDonorsData:(NSString *)query;
+-(NSMutableArray*)showReqData:(NSString *)query;
 -(NSString *)countData:(NSString *)query;
 
-@property(strong,nonatomic) NSMutableArray *arrdata;
+@property(strong,nonatomic) NSMutableArray *donorsdata;
+@property(strong,nonatomic) NSMutableArray *reqdata;
 @property(strong,nonatomic) NSString *strmain;
 
 @end

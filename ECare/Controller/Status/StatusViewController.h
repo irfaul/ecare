@@ -9,12 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StatusViewController : UIViewController {
-    NSMutableArray *reqData;
-}
+@interface StatusViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, retain) UITableView *reqTableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property(strong, nonatomic)NSMutableArray *arrMainData;
 
 @end
 

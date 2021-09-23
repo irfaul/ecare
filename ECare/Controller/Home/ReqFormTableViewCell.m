@@ -45,8 +45,6 @@ CGFloat fGSize = 16.0;
     formDesc = [[UITextView alloc] initWithFrame:CGRectMake(16, 0, self.contentView.frame.size.width, 100)];
     [formDesc setEditable:true];
     [formDesc setSelectable:true];
-    [formDesc setReturnKeyType:UIReturnKeyDone];
-    [formDesc enablesReturnKeyAutomatically];
     [self.contentView addSubview:formDesc];
     [self setHiddenAttribute:false];
 }

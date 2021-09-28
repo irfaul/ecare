@@ -17,7 +17,7 @@
 
 @implementation StatusViewController
 
-@synthesize reqTableView, refreshControl, arrMainData;
+@synthesize reqTableView, refreshControl, arrMainData, nullDataLabel;
 
 NSString *cellReqId = @"cellDonorsId";
 UIStackView *stackViewBtnRefresh;
@@ -46,7 +46,13 @@ DonorsDB *dbreq;
     arrMainData = [[NSMutableArray alloc]init];
     arrMainData = [dbreq showReqData:strShow];
     
-    [reqTableView reloadData];
+    if(arrMainData.count == 0) {
+        nullDataLabel.hidden = NO;
+        reqTableView.hidden = YES;
+    } else {
+        nullDataLabel.hidden = YES;
+        [reqTableView reloadData];
+    }
 }
 
 - (void)setInitComponent {
@@ -63,8 +69,15 @@ DonorsDB *dbreq;
     refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Pull To Refresh"];
     [refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     [reqTableView addSubview:refreshControl];
+    
+    nullDataLabel = [[UILabel alloc] init];
+    nullDataLabel.text = @"You have not made a request yet.";
+    nullDataLabel.font = [[util new] regularFont:&fSize3];
+    nullDataLabel.textColor = [UIColor darkGrayColor];
+    //nullDataLabel.hidden = YES;
 
     [self.view addSubview:reqTableView];
+    [self.view addSubview:nullDataLabel];
     
     [self setConstraint];
 }
@@ -83,6 +96,10 @@ DonorsDB *dbreq;
     [reqTableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-20].active = YES;
     [reqTableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:10].active = YES;
     [reqTableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-10].active = YES;
+    
+    nullDataLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [nullDataLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [nullDataLabel.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

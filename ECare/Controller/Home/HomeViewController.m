@@ -7,6 +7,7 @@
 
 #import "HomeViewController.h"
 #import "ReqFormViewController.h"
+#import "DonorsDB.h"
 #import "util.h"
 
 @interface HomeViewController ()
@@ -16,8 +17,9 @@
 @implementation HomeViewController
 
 UIButton *btnReq;
+DonorsDB *dbReq;
 
-@synthesize logoApp,titleLabel,reqBtnLabel;
+@synthesize logoApp,titleLabel,reqBtnLabel, countStatus;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,9 +117,24 @@ UIButton *btnReq;
     
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    
+    NSString *strCount = [[NSString alloc]initWithFormat:@"select count(*) from request where userid = '19080024' and reqstatus = 'Waiting'"];
+    
+    dbReq = [[DonorsDB alloc]init];
+    countStatus = [[NSString alloc]init];
+    countStatus = [dbReq countData:strCount];
+    
+    NSInteger waitingStatus = [countStatus integerValue];
+    
+    if (waitingStatus > 0) {
+        [btnReq setEnabled:NO];
+    }
+}
+
 - (void)btnReqAction:(UIButton *) sender{
     ReqFormViewController *reqForm = [[ReqFormViewController alloc] init];
-    reqForm.delegate = self;
+    //reqForm.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:reqForm];
     [self presentViewController:nav animated:YES completion:nil];
 }

@@ -167,7 +167,7 @@ DonorsDB *db;
 {
     if(segment.selectedSegmentIndex == 0)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"SELECT * FROM donors ORDER BY date(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountAll = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors"];
@@ -177,7 +177,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 1)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'A+' OR bloodtype = 'A-'"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'A+' OR bloodtype = 'A-' ORDER BY date(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountA = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where bloodtype = 'A+' OR bloodtype = 'A-'"];
@@ -188,7 +188,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 2)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'B+' OR bloodtype = 'B-'"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'B+' OR bloodtype = 'B-' ORDER BY date(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountB = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where bloodtype = 'B+' OR bloodtype = 'B-'"];
@@ -199,7 +199,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 3)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'AB+' OR bloodtype = 'AB-'"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'AB+' OR bloodtype = 'AB-' ORDER BY date(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountAB = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where bloodtype = 'AB+' OR bloodtype = 'AB-'"];
@@ -210,7 +210,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 4)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'O+' OR bloodtype = 'O-'"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where bloodtype = 'O+' OR bloodtype = 'O-' ORDER BY date(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountO = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where bloodtype = 'O+' OR bloodtype = 'O-'"];

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *donorsBtnLabel;
 @property (strong, nonatomic) IBOutlet UILabel *reqBtnLabel;
-
+@property(strong, nonatomic)NSString *countStatus;
 
 
 @end

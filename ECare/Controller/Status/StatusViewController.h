@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, retain) UITableView *reqTableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property(strong, nonatomic)NSMutableArray *arrMainData;
+@property (nonatomic, strong) UILabel *nullDataLabel;
 
 @end
 

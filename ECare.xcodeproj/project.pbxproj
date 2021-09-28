@@ -35,8 +35,6 @@
 		85E1B51D26EED6D00035CCEB /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B51C26EED6D00035CCEB /* ProfileViewController.m */; };
 		85E1B52726EEDEDF0035CCEB /* util.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B52626EEDEDF0035CCEB /* util.m */; };
 		85E1B56E26EF1ECD0035CCEB /* ReqFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B56D26EF1ECD0035CCEB /* ReqFormViewController.m */; };
-		85E1B57526EF36010035CCEB /* ReqFormTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E1B57326EF36010035CCEB /* ReqFormTableViewCell.m */; };
-		85E1B57626EF36010035CCEB /* ReqFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E1B57426EF36010035CCEB /* ReqFormTableViewCell.xib */; };
 		85EE06CB26F43A4300343EF5 /* DonorsDummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85EE06CA26F43A4300343EF5 /* DonorsDummy.plist */; };
 		85F0A07926F47A740021A918 /* ReqTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F0A07726F47A740021A918 /* ReqTableViewCell.m */; };
 		85F0A07A26F47A740021A918 /* ReqTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85F0A07826F47A740021A918 /* ReqTableViewCell.xib */; };
@@ -109,9 +107,6 @@
 		85E1B52626EEDEDF0035CCEB /* util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = util.m; sourceTree = "<group>"; };
 		85E1B56C26EF1ECD0035CCEB /* ReqFormViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqFormViewController.h; sourceTree = "<group>"; };
 		85E1B56D26EF1ECD0035CCEB /* ReqFormViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqFormViewController.m; sourceTree = "<group>"; };
-		85E1B57226EF36010035CCEB /* ReqFormTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqFormTableViewCell.h; sourceTree = "<group>"; };
-		85E1B57326EF36010035CCEB /* ReqFormTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqFormTableViewCell.m; sourceTree = "<group>"; };
-		85E1B57426EF36010035CCEB /* ReqFormTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReqFormTableViewCell.xib; sourceTree = "<group>"; };
 		85EE06CA26F43A4300343EF5 /* DonorsDummy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DonorsDummy.plist; sourceTree = "<group>"; };
 		85F0A07626F47A740021A918 /* ReqTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReqTableViewCell.h; sourceTree = "<group>"; };
 		85F0A07726F47A740021A918 /* ReqTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReqTableViewCell.m; sourceTree = "<group>"; };
@@ -268,9 +263,6 @@
 				85E1B50626EED64A0035CCEB /* HomeViewController.m */,
 				85E1B56C26EF1ECD0035CCEB /* ReqFormViewController.h */,
 				85E1B56D26EF1ECD0035CCEB /* ReqFormViewController.m */,
-				85E1B57226EF36010035CCEB /* ReqFormTableViewCell.h */,
-				85E1B57326EF36010035CCEB /* ReqFormTableViewCell.m */,
-				85E1B57426EF36010035CCEB /* ReqFormTableViewCell.xib */,
 				85B2414226F1B5EC006088A5 /* PickerViewController.h */,
 				85B2414326F1B5EC006088A5 /* PickerViewController.m */,
 			);
@@ -424,7 +416,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85E1B57626EF36010035CCEB /* ReqFormTableViewCell.xib in Resources */,
 				85D5DDD826FAD02A00909149 /* Poppins-Light.ttf in Resources */,
 				85D5DDDD26FAD02A00909149 /* Poppins-Italic.ttf in Resources */,
 				85F90D0226F81F8100BBFDFD /* StatusDetailViewController.xib in Resources */,
@@ -478,7 +469,6 @@
 				85F0A07926F47A740021A918 /* ReqTableViewCell.m in Sources */,
 				85E1B51626EED6AD0035CCEB /* StatusViewController.m in Sources */,
 				85417BC226F07C470061A413 /* ItemTableCell.m in Sources */,
-				85E1B57526EF36010035CCEB /* ReqFormTableViewCell.m in Sources */,
 				85E1B56E26EF1ECD0035CCEB /* ReqFormViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

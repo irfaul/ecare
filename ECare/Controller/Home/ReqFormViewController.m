@@ -6,32 +6,30 @@
 //
 
 #import "ReqFormViewController.h"
-#import "ReqFormTableViewCell.h"
 #import "PickerViewController.h"
 #import "util.h"
-#import "ItemTableCell.h"
 
-@interface ReqFormViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAdaptivePresentationControllerDelegate>
+@interface ReqFormViewController ()
 
 @end
 
 @implementation ReqFormViewController
 
-@synthesize delegate, formTableView, datePicker, datePickerVisible;
+@synthesize datePicker, userName, userID, userDept, userBlood, userGender, userAge, userWeights, userWA, desc;
 
-NSString *cellIdStatic = @"cellId";
-NSString *nameText;
-NSString *deptText;
-NSString *bloodText;
+UILabel *nameText;
+UILabel *idText;
+UILabel *bloodText;
 NSString *genderText;
 NSString *ageText;
 NSString *weightText;
 NSString *cpText;
 NSString *descText;
 NSArray *array;
-int sizeExpandDate = 330;
-ItemTableCell *itemTable;
-ReqFormTableViewCell *cell;
+UIStackView *nameView;
+UIStackView *idView;
+UIStackView *bloodTypeView;
+UIStackView *fieldStack;
 UIGestureRecognizer *tapper;
 
 - (void)viewDidLoad {
@@ -43,6 +41,12 @@ UIGestureRecognizer *tapper;
     
     self.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
     
+    if (@available(iOS 13.0, *)) {
+        [self setModalInPresentation:true];
+    }
+    
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelReqForm)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStyleDone target:self action:NULL];
     self.navigationController.navigationBar.barTintColor = [[util new] primaryColor];
@@ -51,31 +55,113 @@ UIGestureRecognizer *tapper;
     [self.navigationController.navigationBar setTitleTextAttributes:
        @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    formTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    formTableView.delegate = self;
-    formTableView.dataSource = self;
-    formTableView.showsHorizontalScrollIndicator = NO;
-    formTableView.showsVerticalScrollIndicator = NO;
-    [formTableView registerNib:[UINib nibWithNibName:@"ReqFormTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdStatic];
-    formTableView.alwaysBounceVertical = NO;
-    formTableView.bounces = NO;
     
-    tapper = [[UITapGestureRecognizer alloc]
-                    initWithTarget:self action:@selector(handleSingleTap:)];
-        tapper.cancelsTouchesInView = NO;
-        [self.view addGestureRecognizer:tapper];
-    
-    itemTable = [[ItemTableCell alloc] init];
-    cell.formDesc.delegate = self;
-    
+    [self setInitComponent];
     [self setConstraint];
-    [self setValueItemTableCell];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    datePickerVisible = NO;
-    datePicker.hidden = YES;
-    datePicker.translatesAutoresizingMaskIntoConstraints = NO;
+-(void)setInitComponent {
+    tapper = [[UITapGestureRecognizer alloc]
+                    initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+    
+    CGFloat labelFont = 13.0;
+    UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+    UIView *paddingView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+    UIView *paddingView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+    UIView *paddingView4 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+    paddingView4.backgroundColor = [UIColor redColor];
+    
+    nameText = [[UILabel alloc] init];
+    nameText.text = @"Name";
+    nameText.font = [[util new] regularFont:&labelFont];
+    nameText.textColor = [UIColor darkGrayColor];
+    nameText.adjustsFontSizeToFitWidth = YES;
+    nameText.textAlignment = NSTextAlignmentLeft;
+    
+    userName = [[UITextField alloc] init];
+    userName.placeholder = @"Type your name ...";
+    userName.font = [[util new] regularFont:&labelFont];
+    userName.backgroundColor = [UIColor whiteColor];
+    userName.leftView = paddingView1;
+    userName.leftViewMode = UITextFieldViewModeAlways;
+    
+    nameView = [[UIStackView alloc] init];
+    
+    nameView.axis = UILayoutConstraintAxisVertical;
+    nameView.distribution = UIStackViewDistributionEqualSpacing;
+    nameView.alignment = UIStackViewAlignmentFill;
+    nameView.spacing = 5;
+    
+    [nameView addArrangedSubview:nameText];
+    [nameView addArrangedSubview:userName];
+    
+    idText = [[UILabel alloc] init];
+    idText.text = @"ID";
+    idText.font = [[util new] regularFont:&labelFont];
+    idText.textColor = [UIColor darkGrayColor];
+    idText.adjustsFontSizeToFitWidth = YES;
+    idText.textAlignment = NSTextAlignmentLeft;
+
+    userID = [[UITextField alloc] init];
+    userID.placeholder = @"Type your ID ...";
+    userID.font = [[util new] regularFont:&labelFont];
+    userID.backgroundColor = [UIColor whiteColor];
+    userID.keyboardType = UIKeyboardTypeNumberPad;
+    userID.leftView = paddingView2;
+    userID.leftViewMode = UITextFieldViewModeAlways;
+
+    idView = [[UIStackView alloc] init];
+    
+    idView.axis = UILayoutConstraintAxisVertical;
+    idView.distribution = UIStackViewDistributionEqualSpacing;
+    idView.alignment = UIStackViewAlignmentFill;
+    idView.spacing = 5;
+    
+    [idView addArrangedSubview:idText];
+    [idView addArrangedSubview:userID];
+    
+    bloodText = [[UILabel alloc] init];
+    bloodText.text = @"Blood Type";
+    bloodText.font = [[util new] regularFont:&labelFont];
+    bloodText.textColor = [UIColor darkGrayColor];
+    bloodText.adjustsFontSizeToFitWidth = YES;
+    bloodText.textAlignment = NSTextAlignmentLeft;
+    
+    userBlood = [[UITextField alloc] init];
+    userBlood.placeholder = @"Select Blood Type";
+    userBlood.font = [[util new] regularFont:&labelFont];
+    userBlood.backgroundColor = [UIColor whiteColor];
+    [userBlood setEnabled:NO];
+    userBlood.leftView = paddingView3;
+    userBlood.rightView = paddingView4;
+    userBlood.leftViewMode = UITextFieldViewModeAlways;
+    userBlood.rightViewMode = UITextFieldViewModeAlways;
+    
+    bloodTypeView = [[UIStackView alloc] init];
+    
+    bloodTypeView.axis = UILayoutConstraintAxisVertical;
+    bloodTypeView.distribution = UIStackViewDistributionEqualSpacing;
+    bloodTypeView.alignment = UIStackViewAlignmentFill;
+    bloodTypeView.spacing = 5;
+    
+    [bloodTypeView addArrangedSubview:bloodText];
+    [bloodTypeView addArrangedSubview:userBlood];
+    
+    fieldStack = [[UIStackView alloc] init];
+    
+    fieldStack.axis = UILayoutConstraintAxisVertical;
+    fieldStack.distribution = UIStackViewDistributionEqualSpacing;
+    fieldStack.alignment = UIStackViewAlignmentFill;
+    fieldStack.spacing = 12;
+    
+    [fieldStack addArrangedSubview:nameView];
+    [fieldStack addArrangedSubview:idView];
+    [fieldStack addArrangedSubview:bloodTypeView];
+    
+    [self.view addSubview:fieldStack];
+    
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
@@ -83,270 +169,38 @@ UIGestureRecognizer *tapper;
     [self.view endEditing:YES];
 }
 
-- (void)showDatePickerCell {
-    datePickerVisible = YES;
-    
-    //Create the index path where we insert the cell with the picker
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-    
-    [formTableView beginUpdates];
-    [formTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [formTableView endUpdates];
-    datePicker.alpha = 0.0f;
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.datePicker.alpha = 1.0f;
-                     } completion:^(BOOL finished){
-                         self.datePicker.hidden = NO;
-                     }];
-    
-}
-
-- (void)hideDatePickerCell {
-    datePickerVisible = NO;
-    
-    //Create the index path where we insert the cell with the picker
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-    [formTableView beginUpdates];
-    //Delete the picker row
-    [formTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [formTableView endUpdates];
-    [UIView animateWithDuration:0.25
-                     animations:^{
-                         self.datePicker.alpha = 0.0f;
-                     }
-                     completion:^(BOOL finished){
-                         self.datePicker.hidden = YES;
-                     }];
-}
-
 - (void)cancelReqForm {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setValueItemTableCell {
-    array = @[
-        [[ItemTableCell alloc] initWithTitle:@"Pick date" fieldTitle:@"" value:@"" imageItemTable:@"calendar"],
-        [[ItemTableCell alloc] initWithTitle:@"" fieldTitle:@"Dept." value:@"Select" imageItemTable:@""],
-        [[ItemTableCell alloc] initWithTitle:@"" fieldTitle:@"Blood Type" value:@"Select" imageItemTable:@""],
-        [[ItemTableCell alloc] initWithTitle:@"" fieldTitle:@"Gender" value:@"Select" imageItemTable:@""]
-    ];
-}
-
 - (void)setConstraint {
+    fieldStack.translatesAutoresizingMaskIntoConstraints = NO;
+    [fieldStack.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [fieldStack.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:12].active = YES;
+    [fieldStack.widthAnchor constraintEqualToConstant:self.view.bounds.size.width - 40].active = YES;
     
-    [self.view addSubview:formTableView];
+    nameView.translatesAutoresizingMaskIntoConstraints = NO;
+    [nameView.heightAnchor constraintEqualToConstant:55].active = YES;
     
-    formTableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [formTableView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
-    [formTableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-40].active = YES;
-    [formTableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20].active = YES;
-    [formTableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20].active = YES;
+    idView.translatesAutoresizingMaskIntoConstraints = NO;
+    [idView.heightAnchor constraintEqualToConstant:55].active = YES;
+    
+    bloodTypeView.translatesAutoresizingMaskIntoConstraints = NO;
+    [bloodTypeView.heightAnchor constraintEqualToConstant:55].active = YES;
+    
+    userName.translatesAutoresizingMaskIntoConstraints = NO;
+    [userName.heightAnchor constraintEqualToConstant:35].active = YES;
+    
+    userID.translatesAutoresizingMaskIntoConstraints = NO;
+    [userID.heightAnchor constraintEqualToConstant:35].active = YES;
+    
+    userBlood.translatesAutoresizingMaskIntoConstraints = NO;
+    [userBlood.heightAnchor constraintEqualToConstant:35].active = YES;
+    
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *defaultSection = nil;
-        if (section == 1) {
-            return @"Date of Positive Covid-19";
-        } else if (section == 2) {
-            return @"Tell your health problems";
-        }
-    return defaultSection;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger defaultSection = 0;
-    if (section == 0) {
-        return 7;
-    } else if(section == 1) {
-        if (datePickerVisible) {
-            return 2;
-        } else {
-            return 1;
-        }
-    } else if (section == 2) {
-        return 1;
-    }
-    return defaultSection;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return CGFLOAT_MIN;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = formTableView.rowHeight;
-        if (indexPath.section == 1 && indexPath.row == 1){
-            height = datePickerVisible ? sizeExpandDate : 0.0f;
-        }
-    return height;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return nil;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return nil;
-}
-
-- (void)textFieldDidChangeNameText:(UITextField *)textField {
-    nameText = textField.text;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    ReqFormTableViewCell *cell = [formTableView cellForRowAtIndexPath:indexPath];
-    if ([nameText isEqual:@""]) {
-        cell.formTextField.placeholder = @"Name";
-    }
-}
-
-- (void)textFieldDidChangeCpText:(UITextField *)textField {
-    cpText = textField.text;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:6 inSection:0];
-    ReqFormTableViewCell *cell = [formTableView cellForRowAtIndexPath:indexPath];
-    if ([cpText isEqual:@""]) {
-        cell.formTextField.placeholder = @"WA Number";
-    }
-}
-
-- (void)textFieldDidChangeAgeText:(UITextField *)textField {
-    ageText = textField.text;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
-    ReqFormTableViewCell *cell = [formTableView cellForRowAtIndexPath:indexPath];
-    if ([ageText isEqual:@""]) {
-        cell.formTextField.placeholder = @"Age (Years Old)";
-    }
-}
-
-- (void)textFieldDidChangeWeightText:(UITextField *)textField {
-    weightText = textField.text;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:5 inSection:0];
-    ReqFormTableViewCell *cell = [formTableView cellForRowAtIndexPath:indexPath];
-    if ([weightText isEqual:@""]) {
-        cell.formTextField.placeholder = @"Weights (Kg)";
-    }
-}
-
-- (void)textViewDidChange:(UITextView *)textView {
-    descText = textView.text;
-    NSLog(@"userInput %@", descText);
-}
-
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdStatic forIndexPath:indexPath];
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell.formTextField.delegate = self;
-            [cell configureCell:UIKeyboardTypeDefault];
-            [cell.formTextField addTarget:self action:@selector(textFieldDidChangeNameText:) forControlEvents:UIControlEventEditingChanged];
-            if (nameText.length == 0 || [nameText isEqual:@""]) {
-                cell.formTextField.placeholder = @"Name";
-            } else {
-                cell.formTextField.text = nameText;
-            }
-        }
-        if (indexPath.row == 1) {
-            itemTable = array[1];
-            [cell configurePicker:itemTable];
-        }
-        if (indexPath.row == 2) {
-            itemTable = array[2];
-            [cell configurePicker:itemTable];
-        }
-        if (indexPath.row == 3) {
-            itemTable = array[3];
-            [cell configurePicker:itemTable];
-        }
-        if (indexPath.row == 4) {
-            //cell.formTextField.delegate = self;
-            [cell configureCell:UIKeyboardTypeNumberPad];
-            [cell.formTextField addTarget:self action:@selector(textFieldDidChangeAgeText:) forControlEvents:UIControlEventEditingChanged];
-            if (ageText.length == 0 || [ageText isEqual:@""]) {
-                cell.formTextField.placeholder = @"Age (Years Old)";
-            } else {
-                cell.formTextField.text = ageText;
-            }
-        }
-        if (indexPath.row == 5) {
-            cell.formTextField.delegate = self;
-            [cell configureCell:UIKeyboardTypeNumberPad];
-            [cell.formTextField addTarget:self action:@selector(textFieldDidChangeWeightText:) forControlEvents:UIControlEventEditingChanged];
-            if (weightText.length == 0 || [weightText isEqual:@""]) {
-                cell.formTextField.placeholder = @"Weights (Kg)";
-            } else {
-                cell.formTextField.text = weightText;
-            }
-        }
-        if (indexPath.row == 6) {
-            cell.formTextField.delegate = self;
-            [cell configureCell:UIKeyboardTypePhonePad];
-            [cell.formTextField addTarget:self action:@selector(textFieldDidChangeCpText:) forControlEvents:UIControlEventEditingChanged];
-            if (cpText.length == 0 || [cpText isEqual:@""]) {
-                cell.formTextField.placeholder = @"WA Number";
-            } else {
-                cell.formTextField.text = cpText;
-            }
-        }
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            itemTable = array[0];
-            [cell configureDate:itemTable];
-        }
-        if (indexPath.row == 1) {
-            //cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [self setDateExpandable: cell];
-            [cell configureImageActivity];
-        }
-    } else if (indexPath.section == 2) {
-        [cell configureDesc];
-        cell.formDesc.text = descText;
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0) {
-        
-        if (indexPath.row == 1) {
-            PickerViewController *pickerViewController = [[PickerViewController alloc] init];
-            pickerViewController.delegate = self;
-            pickerViewController.pickerLoc = 1;
-            [self.navigationController pushViewController:pickerViewController animated:YES];
-        }
-        if (indexPath.row == 2) {
-            PickerViewController *pickerViewController = [[PickerViewController alloc] init];
-            pickerViewController.delegate = self;
-            pickerViewController.pickerLoc = 2;
-            [self.navigationController pushViewController:pickerViewController animated:YES];
-        }
-        if (indexPath.row == 3) {
-            PickerViewController *pickerViewController = [[PickerViewController alloc] init];
-            pickerViewController.delegate = self;
-            pickerViewController.pickerLoc = 3;
-            [self.navigationController pushViewController:pickerViewController animated:YES];
-        }
-        
-    }
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            if (datePickerVisible){
-                [self hideDatePickerCell];
-            } else {
-                [self showDatePickerCell];
-            }
-        }
-    }
-}
-
-- (void)setDateExpandable:(ReqFormTableViewCell *) cell {
-    [formTableView beginUpdates];
-    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(8, 0, cell.contentView.bounds.size.width, sizeExpandDate)];
+- (void)setDateExpandable {
+    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(8, 0, 400, 330)];
     [datePicker setDatePickerMode:UIDatePickerModeDate];
     if (@available(iOS 14.0, *)) {
         datePicker.preferredDatePickerStyle = UIDatePickerStyleInline;
@@ -362,24 +216,18 @@ UIGestureRecognizer *tapper;
     NSDate * date = [cal dateFromComponents:comps];
     
     [datePicker setDate:date animated:TRUE];
-    [cell.contentView addSubview:datePicker];
     [datePicker reloadInputViews];
-    [formTableView endUpdates];
+    
+    PickerViewController *pickerViewController = [[PickerViewController alloc] init];
+    pickerViewController.delegate = self;
+    pickerViewController.pickerLoc = 1;
+    [self.navigationController pushViewController:pickerViewController animated:YES];
 }
 
 - (void)onDatePickerValueChanged:(UIDatePicker *)datePicker
 {
     NSDateFormatter *formatDate =[[NSDateFormatter alloc] init];
     [formatDate setDateFormat:@"dd MMM yyyy"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-    ReqFormTableViewCell *cell = [formTableView cellForRowAtIndexPath:indexPath];
-    cell.titleItemLabel.text = [formatDate stringFromDate:datePicker.date];
-}
-
-- (void)pickerData:(NSInteger) pickerInt pickerText:(NSString *) pickerText {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:pickerInt inSection:0];
-    ReqFormTableViewCell *cell = [formTableView cellForRowAtIndexPath:indexPath];
-    cell.valueItemLabel.text = pickerText;
 }
 
 /*

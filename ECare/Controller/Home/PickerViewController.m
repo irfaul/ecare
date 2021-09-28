@@ -94,9 +94,9 @@ NSString *cellIdPicker = @"pickerId", *pickerText = @"";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [delegate pickerData:pickerLoc pickerText:pickerText];
-}
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [delegate pickerData:pickerLoc pickerText:pickerText];
+//}
 
 
 @end

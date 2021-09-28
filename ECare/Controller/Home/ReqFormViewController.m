@@ -30,7 +30,10 @@ UIStackView *nameView;
 UIStackView *idView;
 UIStackView *bloodTypeView;
 UIStackView *fieldStack;
+UIStackView *btnStack1;
 UIGestureRecognizer *tapper;
+UIView *paddingView4;
+UIButton *btnArrow;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,9 +72,6 @@ UIGestureRecognizer *tapper;
     CGFloat labelFont = 13.0;
     UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
     UIView *paddingView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
-    UIView *paddingView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
-    UIView *paddingView4 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
-    paddingView4.backgroundColor = [UIColor redColor];
     
     nameText = [[UILabel alloc] init];
     nameText.text = @"Name";
@@ -129,15 +129,32 @@ UIGestureRecognizer *tapper;
     bloodText.adjustsFontSizeToFitWidth = YES;
     bloodText.textAlignment = NSTextAlignmentLeft;
     
-    userBlood = [[UITextField alloc] init];
-    userBlood.placeholder = @"Select Blood Type";
-    userBlood.font = [[util new] regularFont:&labelFont];
+    userBlood = [[UIButton alloc] init];
+    userBlood.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    userBlood.contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
+    [userBlood setTitle: @"Select Your Blood Type" forState: UIControlStateNormal];
+    userBlood.titleLabel.font = [[util new] regularFont:&labelFont];
+    [userBlood setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     userBlood.backgroundColor = [UIColor whiteColor];
-    [userBlood setEnabled:NO];
-    userBlood.leftView = paddingView3;
-    userBlood.rightView = paddingView4;
-    userBlood.leftViewMode = UITextFieldViewModeAlways;
-    userBlood.rightViewMode = UITextFieldViewModeAlways;
+    [userBlood sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    
+    btnArrow = [[UIButton alloc] init];
+    btnArrow.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    btnArrow.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 8);
+    [btnArrow setImage:[UIImage imageNamed:@"chevron"] forState:UIControlStateNormal];
+    btnArrow.backgroundColor = [UIColor whiteColor];
+    
+    btnStack1 = [[UIStackView alloc] init];
+    
+    btnStack1.axis = UILayoutConstraintAxisHorizontal;
+    btnStack1.distribution = UIStackViewDistributionFillEqually;
+    btnStack1.alignment = UIStackViewAlignmentFill;
+    btnStack1.spacing = 0;
+    
+    [btnStack1 addArrangedSubview:userBlood];
+    [btnStack1 addArrangedSubview:btnArrow];
+    
     
     bloodTypeView = [[UIStackView alloc] init];
     
@@ -147,7 +164,7 @@ UIGestureRecognizer *tapper;
     bloodTypeView.spacing = 5;
     
     [bloodTypeView addArrangedSubview:bloodText];
-    [bloodTypeView addArrangedSubview:userBlood];
+    [bloodTypeView addArrangedSubview:btnStack1];
     
     fieldStack = [[UIStackView alloc] init];
     
@@ -162,6 +179,14 @@ UIGestureRecognizer *tapper;
     
     [self.view addSubview:fieldStack];
     
+}
+
+-(void) showBloodPicker
+{
+    PickerViewController *pickerViewController = [[PickerViewController alloc] init];
+    pickerViewController.delegate = self;
+    pickerViewController.pickerLoc = 1;
+    [self.navigationController pushViewController:pickerViewController animated:YES];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender
@@ -194,8 +219,8 @@ UIGestureRecognizer *tapper;
     userID.translatesAutoresizingMaskIntoConstraints = NO;
     [userID.heightAnchor constraintEqualToConstant:35].active = YES;
     
-    userBlood.translatesAutoresizingMaskIntoConstraints = NO;
-    [userBlood.heightAnchor constraintEqualToConstant:35].active = YES;
+    btnStack1.translatesAutoresizingMaskIntoConstraints = NO;
+    [btnStack1.heightAnchor constraintEqualToConstant:35].active = YES;
     
 }
 
@@ -218,10 +243,7 @@ UIGestureRecognizer *tapper;
     [datePicker setDate:date animated:TRUE];
     [datePicker reloadInputViews];
     
-    PickerViewController *pickerViewController = [[PickerViewController alloc] init];
-    pickerViewController.delegate = self;
-    pickerViewController.pickerLoc = 1;
-    [self.navigationController pushViewController:pickerViewController animated:YES];
+    
 }
 
 - (void)onDatePickerValueChanged:(UIDatePicker *)datePicker

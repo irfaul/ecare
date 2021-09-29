@@ -34,15 +34,17 @@ UIStackView *idView;
 UIStackView *deptView;
 UIStackView *bloodTypeView;
 UIStackView *genderTypeView;
+UIStackView *ageUserView;
 UIStackView *fieldStack;
 UIStackView *btnStack1;
 UIStackView *btnStack2;
 UIStackView *btnStack3;
 UIGestureRecognizer *tapper;
-UIView *paddingView4;
 UIButton *btnArrow1;
 UIButton *btnArrow2;
 UIButton *btnArrow3;
+UIScrollView *scroll;
+UIView *subView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,9 +82,23 @@ UIButton *btnArrow3;
     
     arrayBlood = @[@"A+",@"A-",@"B+",@"B-",@"AB+",@"AB-",@"O+",@"O-"];
     
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    scroll.scrollEnabled=YES;
+    scroll.userInteractionEnabled=YES;
+    scroll.showsVerticalScrollIndicator=NO;
+    scroll.contentSize = CGSizeMake(self.view.frame.size.width, 800);
+    
+    subView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, 800)];
+    //subView.backgroundColor = [UIColor greenColor];
+    
+    [scroll addSubview:subView];
+    
     CGFloat labelFont = 13.0;
     UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
     UIView *paddingView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+    UIView *paddingView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 8, 20)];
+    
+    //---------NAME VIEW---------------------------------------------------
     
     nameText = [[UILabel alloc] init];
     nameText.text = @"Name";
@@ -107,6 +123,8 @@ UIButton *btnArrow3;
     
     [nameView addArrangedSubview:nameText];
     [nameView addArrangedSubview:userName];
+    
+    //---------ID VIEW---------------------------------------------------
     
     idText = [[UILabel alloc] init];
     idText.text = @"ID";
@@ -277,6 +295,34 @@ UIButton *btnArrow3;
     [bloodTypeView addArrangedSubview:bloodText];
     [bloodTypeView addArrangedSubview:btnStack2];
     
+    //---------AGE VIEW---------------------------------------------------
+    
+    ageText = [[UILabel alloc] init];
+    ageText.text = @"Age";
+    ageText.font = [[util new] regularFont:&labelFont];
+    ageText.textColor = [UIColor darkGrayColor];
+    ageText.adjustsFontSizeToFitWidth = YES;
+    ageText.textAlignment = NSTextAlignmentLeft;
+    
+    userAge = [[UITextField alloc] init];
+    userAge.placeholder = @"Type your age ...";
+    userAge.font = [[util new] regularFont:&labelFont];
+    userAge.backgroundColor = [UIColor whiteColor];
+    userID.keyboardType = UIKeyboardTypeNumberPad;
+    userAge.leftView = paddingView3;
+    userAge.leftViewMode = UITextFieldViewModeAlways;
+    
+    ageUserView = [[UIStackView alloc] init];
+    
+    ageUserView.axis = UILayoutConstraintAxisVertical;
+    ageUserView.distribution = UIStackViewDistributionEqualSpacing;
+    ageUserView.alignment = UIStackViewAlignmentFill;
+    ageUserView.spacing = 5;
+    
+    [ageUserView addArrangedSubview:ageText];
+    [ageUserView addArrangedSubview:userAge];
+
+    
     //---------STACK ALL COMPONENT---------------------------------------
     
     fieldStack = [[UIStackView alloc] init];
@@ -291,8 +337,10 @@ UIButton *btnArrow3;
     [fieldStack addArrangedSubview:deptView];
     [fieldStack addArrangedSubview:genderTypeView];
     [fieldStack addArrangedSubview:bloodTypeView];
+    [fieldStack addArrangedSubview:ageUserView];
     
-    [self.view addSubview:fieldStack];
+    [subView addSubview:fieldStack];
+    [self.view addSubview:scroll];
     
 }
 
@@ -410,9 +458,10 @@ UIButton *btnArrow3;
 }
 
 - (void)setConstraint {
+    
     fieldStack.translatesAutoresizingMaskIntoConstraints = NO;
     [fieldStack.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-    [fieldStack.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:12].active = YES;
+    [fieldStack.topAnchor constraintEqualToAnchor:subView.topAnchor constant:12].active = YES;
     [fieldStack.widthAnchor constraintEqualToConstant:self.view.bounds.size.width - 40].active = YES;
     
     nameView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -430,6 +479,9 @@ UIButton *btnArrow3;
     bloodTypeView.translatesAutoresizingMaskIntoConstraints = NO;
     [bloodTypeView.heightAnchor constraintEqualToConstant:55].active = YES;
     
+    ageUserView.translatesAutoresizingMaskIntoConstraints = NO;
+    [ageUserView.heightAnchor constraintEqualToConstant:55].active = YES;
+    
     userName.translatesAutoresizingMaskIntoConstraints = NO;
     [userName.heightAnchor constraintEqualToConstant:35].active = YES;
     
@@ -444,6 +496,9 @@ UIButton *btnArrow3;
     
     btnStack3.translatesAutoresizingMaskIntoConstraints = NO;
     [btnStack3.heightAnchor constraintEqualToConstant:35].active = YES;
+    
+    userAge.translatesAutoresizingMaskIntoConstraints = NO;
+    [userAge.heightAnchor constraintEqualToConstant:35].active = YES;
     
 }
 

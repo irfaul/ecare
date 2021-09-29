@@ -23,8 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign) NSString* pickerString;
 
-@property (nonatomic, assign) NSInteger pickerLoc;
-
 @property(nonatomic, assign)id delegate;
 
 @end

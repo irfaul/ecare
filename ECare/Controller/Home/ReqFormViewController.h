@@ -9,15 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ReqFormViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIAdaptivePresentationControllerDelegate>
+@interface ReqFormViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIAdaptivePresentationControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *datePicker;
 
 @property (retain, nonatomic) UITextField *userName;
 @property (retain, nonatomic) UITextField *userID;
-@property (retain, nonatomic) UITextField *userDept;
+@property (retain, nonatomic) UIButton *userDept;
 @property (retain, nonatomic) UIButton *userBlood;
-@property (retain, nonatomic) UITextField *userGender;
+@property (retain, nonatomic) UIButton *userGender;
 @property (retain, nonatomic) UITextField *userAge;
 @property (retain, nonatomic) UITextField *userWeights;
 @property (retain, nonatomic) UITextField *userWA;

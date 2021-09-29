@@ -6,6 +6,7 @@
 //
 
 #import "PickerViewController.h"
+#import "ReqFormViewController.h"
 #import "util.h"
 
 @interface PickerViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -14,7 +15,7 @@
 
 @implementation PickerViewController
 
-@synthesize pickerTableView, delegate, pickerLoc, pickerString;
+@synthesize pickerTableView, delegate, pickerString;
 
 NSString *cellIdPicker = @"pickerId", *pickerText = @"";
 
@@ -40,13 +41,8 @@ NSString *cellIdPicker = @"pickerId", *pickerText = @"";
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Picker" ofType:@"plist"];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
     
-    if (pickerLoc == 1) {
-        dataSource = dict[@"Dept"];
-    } else if (pickerLoc == 2) {
-        dataSource = dict[@"BloodType"];
-    } else if (pickerLoc == 3) {
-        dataSource = dict[@"Gender"];
-    }
+    dataSource = dict[@"Dept"];
+    
     
     [self setConstraint];
 }
@@ -87,16 +83,16 @@ NSString *cellIdPicker = @"pickerId", *pickerText = @"";
         if (i == indexPath.row) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             pickerText = cell.textLabel.text;
+            
+            ReqFormViewController *myController = (ReqFormViewController *)[self.navigationController.viewControllers objectAtIndex:0];
+                [myController.userDept setTitle:pickerText forState:UIControlStateNormal] ;
+            [self.navigationController popToViewController:myController animated:YES];
+            
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-//- (void)viewWillDisappear:(BOOL)animated{
-//    [delegate pickerData:pickerLoc pickerText:pickerText];
-//}
-
 
 @end

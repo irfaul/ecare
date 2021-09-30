@@ -10,7 +10,7 @@
 #import "DonorsDB.h"
 #import "util.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () <sendData>
 
 @end
 
@@ -117,35 +117,47 @@ DonorsDB *dbReq;
     
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
+    ReqFormViewController *reqVC = [[ReqFormViewController alloc] init];
+    reqVC.delegate = self;
     
-    NSString *strCount = [[NSString alloc]initWithFormat:@"select count(*) from request where userid = '19080024' and reqstatus = 'Waiting'"];
+    NSString *strCount = [[NSString alloc]initWithFormat:@"select count(*) from request where userid = '19080036' and reqstatus = 'Waiting'"];
     
     dbReq = [[DonorsDB alloc]init];
     countStatus = [[NSString alloc]init];
     countStatus = [dbReq countData:strCount];
-    
+
     NSInteger waitingStatus = [countStatus integerValue];
-    
+
     if (waitingStatus > 0) {
         [btnReq setEnabled:NO];
-    }
+    } else { [btnReq setEnabled:YES]; }
 }
 
 - (void)btnReqAction:(UIButton *) sender{
     ReqFormViewController *reqForm = [[ReqFormViewController alloc] init];
-    //reqForm.delegate = self;
+    reqForm.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:reqForm];
+    if (@available(iOS 13.0, *)) {
+        [nav setModalInPresentation:true];
+    }
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:nav animated:YES completion:nil];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)isSubmitted:(BOOL)state {
+    NSString *strCount = [[NSString alloc]initWithFormat:@"select count(*) from request where userid = '19080036' and reqstatus = 'Waiting'"];
+    
+    //dbReq = [[DonorsDB alloc]init];
+    countStatus = [[NSString alloc]init];
+    countStatus = [dbReq countData:strCount];
+
+    NSInteger waitingStatus = [countStatus integerValue];
+
+    if (waitingStatus > 0) {
+        [btnReq setEnabled:NO];
+    } else { [btnReq setEnabled:YES]; }
 }
-*/
+
 
 @end

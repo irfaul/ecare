@@ -9,6 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol sendData <NSObject>
+
+- (void)isSubmitted:(BOOL) state;
+
+@end
+
 @interface ReqFormViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIAdaptivePresentationControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *datePicker;
@@ -21,7 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (retain, nonatomic) UITextField *userAge;
 @property (retain, nonatomic) UITextField *userWeights;
 @property (retain, nonatomic) UITextField *userWA;
+@property (retain, nonatomic) UILabel *userDate;
 @property (retain, nonatomic) UITextView *desc;
+@property(nonatomic, assign)id delegate;
+
 
 @end
 

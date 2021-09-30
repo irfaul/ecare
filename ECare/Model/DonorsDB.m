@@ -133,17 +133,29 @@
                 
                 NSString *reqstatus = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 11)];
                 
-                NSString *donordate = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 12)];
+                char* tmp1 = (char*)sqlite3_column_text(connection, 12);
                 
-                NSString *donorloc = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 13)];
+                NSString *donordate = tmp1 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp1];
                 
-                NSString *donorsname = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 14)];
+                char* tmp2 = (char*)sqlite3_column_text(connection, 13);
                 
-                NSString *donorsdept = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 15)];
+                NSString *donorloc = tmp2 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp2];
                 
-                NSString *donorscp = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 16)];
+                char* tmp3 = (char*)sqlite3_column_text(connection, 14);
                 
-                NSString *notes = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 17)];
+                NSString *donorsname = tmp3 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp3];
+                
+                char* tmp4 = (char*)sqlite3_column_text(connection, 15);
+                
+                NSString *donorsdept = tmp4 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp4];
+                
+                char* tmp5 = (char*)sqlite3_column_text(connection, 16);
+                
+                NSString *donorscp = tmp5 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp5];
+                
+                char* tmp6 = (char*)sqlite3_column_text(connection, 17);
+                
+                NSString *notes = tmp6 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp6];
                 
                 [dict setObject:userid forKey:@"userid"];
                 [dict setObject:name forKey:@"name"];

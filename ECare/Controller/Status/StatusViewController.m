@@ -38,9 +38,10 @@ DonorsDB *dbreq;
     [self setInitComponent];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = NO;
     
-    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080024'"];
+    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036'"];
     
     dbreq = [[DonorsDB alloc]init];
     arrMainData = [[NSMutableArray alloc]init];
@@ -51,6 +52,7 @@ DonorsDB *dbreq;
         reqTableView.hidden = YES;
     } else {
         nullDataLabel.hidden = YES;
+        reqTableView.hidden = NO;
         [reqTableView reloadData];
     }
 }
@@ -107,9 +109,9 @@ DonorsDB *dbreq;
     return height;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.tabBar.hidden = NO;
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//    self.tabBarController.tabBar.hidden = NO;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return arrMainData.count;
@@ -189,14 +191,30 @@ DonorsDB *dbreq;
                                actionWithTitle:@"OK"
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
-                                    [self dismissViewControllerAnimated:YES completion:nil];
+                                    NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET reqstatus = 'Cancelled' WHERE userid = '19080036'"];
+
+                                    BOOL st = [dbreq showAllDonorsData:strUpdate];
+
+                                    if(st){
+                                        NSLog(@"update succees");
+                                    }else{
+                                        NSLog(@"update failed");
+                                    }
+                                    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036'"];
+
+                                    //dbreq = [[DonorsDB alloc]init];
+                                    self.arrMainData = [[NSMutableArray alloc]init];
+                                    self.arrMainData = [dbreq showReqData:strShow];
+
+                                    [self.reqTableView reloadData];
+//                                    [self dismissViewControllerAnimated:YES completion:nil];
                                }];
     
     UIAlertAction* cancelButton = [UIAlertAction
                                actionWithTitle:@"Cancel"
                                style:UIAlertActionStyleCancel
                                handler:^(UIAlertAction * action) {
-                                    [self dismissViewControllerAnimated:YES completion:nil];
+                                [self dismissViewControllerAnimated:YES completion:nil];
                                }];
     
     [alert addAction:okButton];

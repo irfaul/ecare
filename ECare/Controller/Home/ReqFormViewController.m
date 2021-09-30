@@ -49,10 +49,12 @@ UIGestureRecognizer *tapper;
 UIButton *btnArrow1;
 UIButton *btnArrow2;
 UIButton *btnArrow3;
+UIButton *datePickerBtn;
 UIScrollView *scroll;
 UIView *subView;
 UIView *dateLabelView;
 UIImageView *datepict;
+UIToolbar *toolbar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -398,28 +400,21 @@ UIImageView *datepict;
     userDate.backgroundColor = [UIColor whiteColor];
     userDate.userInteractionEnabled = NO;
     
-    datePicker = [[UIDatePicker alloc]init];
-    [datePicker setDate:[NSDate date]];
-    [datePicker setDatePickerMode:UIDatePickerModeDate];
-    if (@available(iOS 13.6, *)) {
-        datePicker.preferredDatePickerStyle = UIDatePickerStyleCompact;
-    }
-    datePicker.backgroundColor = [UIColor whiteColor];
+    datePickerBtn = [[UIButton alloc] init];
+    datePickerBtn.backgroundColor = [UIColor whiteColor];
+    [datePickerBtn addTarget:self action:@selector(btnDatePicker)
+     forControlEvents:UIControlEventTouchUpInside];
     
-    [userDate bringSubviewToFront:datePicker];
+    [userDate bringSubviewToFront:datePickerBtn];
     
     datepict = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calendar"]];
-    
     
     dateLabelView = [[UIView alloc] init];
     dateLabelView.backgroundColor = [UIColor whiteColor];
     
     [dateLabelView addSubview:datepict];
-    [dateLabelView addSubview:datePicker];
+    [dateLabelView addSubview:datePickerBtn];
     [dateLabelView addSubview:userDate];
-    
-    
-    [datePicker addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
     
     dateView = [[UIStackView alloc] init];
     
@@ -552,6 +547,32 @@ UIImageView *datepict;
     return sectionHeight;
 }
 
+-(void)btnDatePicker {
+    datePicker = [[UIDatePicker alloc]init];
+    [datePicker setDate:[NSDate date]];
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    if (@available(iOS 13.6, *)) {
+        datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+    datePicker.backgroundColor = [UIColor whiteColor];
+    datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [datePicker setValue:[UIColor blackColor] forKey:@"textColor"];
+    
+    datePicker.frame = CGRectMake(0.0, [UIScreen mainScreen].bounds.size.height - 300, [UIScreen mainScreen].bounds.size.width, 300);
+    [datePicker addTarget:self action:@selector(updateLabel:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:datePicker];
+    
+    toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 300, [UIScreen mainScreen].bounds.size.width, 50)];
+        toolbar.barStyle = UIBarStyleDefault;
+        toolbar.items = @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(onDoneButtonClick)]];
+    [toolbar sizeToFit];
+    [self.view addSubview:toolbar];
+}
+
+-(void)onDoneButtonClick {
+    [toolbar removeFromSuperview];
+    [datePicker removeFromSuperview];
+}
 
 -(void)btnBlood {
     //Need to use an UIAlertController for iOS 8 instead of an action view
@@ -726,45 +747,16 @@ UIImageView *datepict;
     [userDate.trailingAnchor constraintEqualToAnchor:dateLabelView.trailingAnchor].active = YES;
     [userDate.leadingAnchor constraintEqualToAnchor:datepict.trailingAnchor constant:8].active = YES;
     
-    datePicker.translatesAutoresizingMaskIntoConstraints = NO;
-    [datePicker.topAnchor constraintEqualToAnchor:dateLabelView.topAnchor].active = YES;
-    [datePicker.bottomAnchor constraintEqualToAnchor:dateLabelView.bottomAnchor].active = YES;
-    [datePicker.trailingAnchor constraintEqualToAnchor:dateLabelView.trailingAnchor].active = YES;
-    [datePicker.leadingAnchor constraintEqualToAnchor:datepict.trailingAnchor constant:8].active = YES;
+    datePickerBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    [datePickerBtn.topAnchor constraintEqualToAnchor:dateLabelView.topAnchor].active = YES;
+    [datePickerBtn.bottomAnchor constraintEqualToAnchor:dateLabelView.bottomAnchor].active = YES;
+    [datePickerBtn.trailingAnchor constraintEqualToAnchor:dateLabelView.trailingAnchor].active = YES;
+    [datePickerBtn.leadingAnchor constraintEqualToAnchor:datepict.trailingAnchor constant:8].active = YES;
     
     desc.translatesAutoresizingMaskIntoConstraints = NO;
     [desc.heightAnchor constraintEqualToConstant:80].active = YES;
     
 }
-
-- (void)setDateExpandable {
-    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(8, 0, 400, 330)];
-    [datePicker setDatePickerMode:UIDatePickerModeDate];
-    if (@available(iOS 14.0, *)) {
-        datePicker.preferredDatePickerStyle = UIDatePickerStyleInline;
-    }
-    [datePicker addTarget:self action:@selector(onDatePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
-    
-    NSDate * now = [[NSDate alloc] init];
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents * comps = [cal components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:now];
-    [comps setHour:23];
-    [comps setMinute:59];
-    [comps setSecond:59];
-    NSDate * date = [cal dateFromComponents:comps];
-    
-    [datePicker setDate:date animated:TRUE];
-    [datePicker reloadInputViews];
-    
-    
-}
-
-- (void)onDatePickerValueChanged:(UIDatePicker *)datePicker
-{
-    NSDateFormatter *formatDate =[[NSDateFormatter alloc] init];
-    [formatDate setDateFormat:@"dd MMM yyyy"];
-}
-
 /*
 #pragma mark - Navigation
 

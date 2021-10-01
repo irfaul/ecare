@@ -52,6 +52,8 @@
                 
                 NSString *submitdate = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 9)];
                 
+                NSString *statusdonors = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 10)];
+                
                 [dict setObject:name forKey:@"name"];
                 [dict setObject:dept forKey:@"dept"];
                 [dict setObject:bloodtype forKey:@"bloodtype"];
@@ -60,6 +62,7 @@
                 [dict setObject:contactperson forKey:@"contactperson"];
                 [dict setObject:available forKey:@"available"];
                 [dict setObject:submitdate forKey:@"submitdate"];
+                [dict setObject:statusdonors forKey:@"statusdonors"];
                 
                 [donorsdata addObject:dict];
             }

@@ -121,6 +121,8 @@ DonorsDB *dbreq;
     
     ReqTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReqId forIndexPath:indexPath];
     
+    NSLog(@"%@", [NSString stringWithFormat:@"req id - %@", [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"reqid"]]);
+    
     // Configure the cell...
     NSString *statusReq = [[NSString alloc] init];
     statusReq = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"reqstatus"];

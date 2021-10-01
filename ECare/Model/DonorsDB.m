@@ -111,6 +111,8 @@
             while (sqlite3_step(connection) == SQLITE_ROW) {
                 NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
                 
+                NSString *reqid = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 0)];
+                
                 NSString *userid = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 1)];
                 
                 NSString *name = [[NSString alloc]initWithUTF8String:(char *)sqlite3_column_text(connection, 2)];
@@ -157,6 +159,7 @@
                 
                 NSString *notes = tmp6 == NULL ? @"-" : [[NSString alloc]initWithUTF8String:tmp6];
                 
+                [dict setObject:reqid forKey:@"reqid"];
                 [dict setObject:userid forKey:@"userid"];
                 [dict setObject:name forKey:@"name"];
                 [dict setObject:dept forKey:@"dept"];

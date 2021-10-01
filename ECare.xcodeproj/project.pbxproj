@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		85258FC326F9A9B2009C3794 /* DonorsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 85258FC226F9A9B2009C3794 /* DonorsDB.m */; };
 		85258FC926F9AA37009C3794 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 85258FC826F9AA25009C3794 /* libsqlite3.tbd */; };
-		85417BC226F07C470061A413 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85417BC126F07C470061A413 /* ItemTableCell.m */; };
 		856E39E026F42E03003B1949 /* DonorsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 856E39DE26F42E03003B1949 /* DonorsTableViewCell.m */; };
 		856E39E126F42E03003B1949 /* DonorsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 856E39DF26F42E03003B1949 /* DonorsTableViewCell.xib */; };
 		85B2414426F1B5EC006088A5 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B2414326F1B5EC006088A5 /* PickerViewController.m */; };
@@ -63,8 +62,6 @@
 		85258FC126F9A9B2009C3794 /* DonorsDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsDB.h; sourceTree = "<group>"; };
 		85258FC226F9A9B2009C3794 /* DonorsDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsDB.m; sourceTree = "<group>"; };
 		85258FC826F9AA25009C3794 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		85417BC026F07C470061A413 /* ItemTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
-		85417BC126F07C470061A413 /* ItemTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
 		856E39DD26F42E03003B1949 /* DonorsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsTableViewCell.h; sourceTree = "<group>"; };
 		856E39DE26F42E03003B1949 /* DonorsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsTableViewCell.m; sourceTree = "<group>"; };
 		856E39DF26F42E03003B1949 /* DonorsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonorsTableViewCell.xib; sourceTree = "<group>"; };
@@ -248,8 +245,6 @@
 		85E1B4F426EED4420035CCEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				85417BC026F07C470061A413 /* ItemTableCell.h */,
-				85417BC126F07C470061A413 /* ItemTableCell.m */,
 				85258FC126F9A9B2009C3794 /* DonorsDB.h */,
 				85258FC226F9A9B2009C3794 /* DonorsDB.m */,
 			);
@@ -468,7 +463,6 @@
 				85E1B4BD26EED2840035CCEB /* SceneDelegate.m in Sources */,
 				85F0A07926F47A740021A918 /* ReqTableViewCell.m in Sources */,
 				85E1B51626EED6AD0035CCEB /* StatusViewController.m in Sources */,
-				85417BC226F07C470061A413 /* ItemTableCell.m in Sources */,
 				85E1B56E26EF1ECD0035CCEB /* ReqFormViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,7 +561,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -620,7 +614,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -636,7 +630,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QJRQR82NL5;
 				INFOPLIST_FILE = ECare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -655,7 +649,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QJRQR82NL5;
 				INFOPLIST_FILE = ECare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

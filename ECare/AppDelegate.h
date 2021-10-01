@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSString *strPath;
 -(void)copyandpaste;
+-(void)adminRole;
 
 @end
 

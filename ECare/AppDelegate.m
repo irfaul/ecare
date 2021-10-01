@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "HomeViewController.h"
+#import "DonorsDB.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
     // Override point for customization after application launch.
     
     [self copyandpaste];
+    [self adminRole];
     
     return YES;
 }
@@ -61,8 +63,28 @@
 }
 
 //----------------ADMIN ROLE---------------------------------------//
-//    arrMainData = [dbreq showReqData:strShow];
-
+-(void)adminRole {
+//    NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET submitdate = datetime('now','localtime'), reqstatus = 'Scheduled', donordate = '23-10-2021', donorloc = 'RS Pengen Sembuh', donorsname = 'Joko', donorsdept = 'F/W Design', donorscp = '6282225454567', notes = 'Harap segera melakukan konfirmasi ke pendonor melalui WA yang tesedia' WHERE userid = '19080036'"];
+//
+//    DonorsDB *db = [[DonorsDB alloc] init];
+//    BOOL update = [db showAllDonorsData:strUpdate];
+//
+//    if(update){
+//        NSLog(@"update succees");
+//    }else{
+//        NSLog(@"update failed");
+//    }
+//    
+//    NSString *strInsert = [[NSString alloc]initWithFormat:@"INSERT INTO donors (userid,name,dept,bloodtype,gender,age,contactperson,available,submitdate) VALUES ('21020007','Kim Jong Oen','F/W Design','O+','Male','23','6285146373220','20-09-2021',datetime('now','localtime'))"];
+//    
+//    BOOL insert = [db showAllDonorsData:strInsert];
+//    
+//    if(insert){
+//        NSLog(@"insert succees");
+//    }else{
+//        NSLog(@"insert failed");
+//    }
+}
 //-----------------------------------------------------------------//
 
 

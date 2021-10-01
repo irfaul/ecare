@@ -11,6 +11,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic , assign) bool blockRotation;
 
 @property (strong, nonatomic) NSString *strPath;
 -(void)copyandpaste;

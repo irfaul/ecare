@@ -62,6 +62,14 @@
     NSLog(@"%@ Path DB",strPath);
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+ {
+    if (self.blockRotation) {
+        return UIInterfaceOrientationMaskPortrait;
+ }
+     return UIInterfaceOrientationMaskAll;
+ }
+
 //----------------ADMIN ROLE---------------------------------------//
 -(void)adminRole {
 //    NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET submitdate = datetime('now','localtime'), reqstatus = 'Scheduled', donordate = '23-10-2021', donorloc = 'RS Pengen Sembuh', donorsname = 'Joko', donorsdept = 'F/W Design', donorscp = '6282225454567', notes = 'Harap segera melakukan konfirmasi ke pendonor melalui WA yang tesedia' WHERE userid = '19080036' and reqid = 4"];

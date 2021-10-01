@@ -7,6 +7,7 @@
 
 #import "HomeViewController.h"
 #import "ReqFormViewController.h"
+#import "AppDelegate.h"
 #import "DonorsDB.h"
 #import "util.h"
 
@@ -26,6 +27,8 @@ DonorsDB *dbReq;
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
+    AppDelegate* shared = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    shared.blockRotation=YES;
     
     [self setInitComponent];
 }
@@ -33,7 +36,6 @@ DonorsDB *dbReq;
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDarkContent;
 }
-
 
 - (void)setInitComponent {
     

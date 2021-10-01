@@ -486,6 +486,7 @@ UIToolbar *toolbar;
         [alert addAction:cancel];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
+        
         NSString *strShow = [[NSString alloc] initWithFormat:@"INSERT INTO request (userid,name,dept,bloodtype,gender,age,contactperson,userdpc,userhp,submitdate,reqstatus) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@',datetime('now', 'localtime'),'Waiting')",userID.text,userName.text,userDept.currentTitle,userBlood.currentTitle,userGender.currentTitle,userAge.text,userWA.text,userDate.text,desc.text];
         DonorsDB *db = [[DonorsDB alloc] init];
         BOOL st = [db showAllDonorsData:strShow];
@@ -496,7 +497,21 @@ UIToolbar *toolbar;
             NSLog(@"insert failed");
         }
         [delegate isSubmitted:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        UIAlertController * alert = [UIAlertController
+                                         alertControllerWithTitle:@"Thanks for submitting"
+                                         message:@"Please wait and check your Submission Status, we will give you confirmation soon"
+                                         preferredStyle:UIAlertControllerStyleAlert];
+            
+            
+            
+        UIAlertAction* okButton = [UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                  }];
+            
+        [alert addAction:okButton];
+        [self presentViewController:alert animated:YES completion:nil];
+        
     }
 }
 

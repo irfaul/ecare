@@ -72,16 +72,16 @@
 
 //----------------ADMIN ROLE---------------------------------------//
 -(void)adminRole {
-    NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET submitdate = datetime('now','localtime'), reqstatus = 'Scheduled', donordate = '23-10-2021', donorloc = 'RS Pengen Sembuh', donorsname = 'Joko', donorsdept = 'F/W Design', donorscp = '6282225454567', notes = 'Harap segera melakukan konfirmasi ke pendonor melalui WA yang tesedia' WHERE userid = '19080036' and reqid = 3"];
-
-    DonorsDB *db = [[DonorsDB alloc] init];
-    BOOL update = [db showAllDonorsData:strUpdate];
-
-    if(update){
-        NSLog(@"update succees");
-    }else{
-        NSLog(@"update failed");
-    }
+//    NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET submitdate = datetime('now','localtime'), reqstatus = 'Scheduled', donordate = '23-10-2021', donorloc = 'RS Pengen Sembuh', donorsname = 'Joko', donorsdept = 'F/W Design', donorscp = '6282225454567', notes = 'Harap segera melakukan konfirmasi ke pendonor melalui WA yang tesedia' WHERE userid = '19080036' and reqid = 3"];
+//
+//    DonorsDB *db = [[DonorsDB alloc] init];
+//    BOOL update = [db showAllDonorsData:strUpdate];
+//
+//    if(update){
+//        NSLog(@"update succees");
+//    }else{
+//        NSLog(@"update failed");
+//    }
 //    
 //    NSString *strInsert = [[NSString alloc]initWithFormat:@"INSERT INTO donors (userid,name,dept,bloodtype,gender,age,contactperson,available,submitdate,statusdonors) VALUES ('21080012','Mumun','Mecha Design','A+','Female','29','6285146373220','05-10-2021',datetime('now','localtime'),'Scheduled')"];
 //

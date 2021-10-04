@@ -59,7 +59,7 @@ DonorsDB *db;
 
 - (void)viewDidAppear:(BOOL)animated{
     
-    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where statusdonors = 'Waiting' ORDER BY date(submitdate) DESC"];
+    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where statusdonors = 'Waiting' ORDER BY datetime(submitdate) DESC"];
     
     db = [[DonorsDB alloc]init];
     arrMainData = [[NSMutableArray alloc]init];
@@ -167,7 +167,7 @@ DonorsDB *db;
 {
     if(segment.selectedSegmentIndex == 0)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"SELECT * FROM donors where statusdonors = 'Waiting' ORDER BY date(submitdate) DESC"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"SELECT * FROM donors where statusdonors = 'Waiting' ORDER BY datetime(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountAll = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where statusdonors = 'Waiting'"];
@@ -177,7 +177,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 1)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'A+' OR bloodtype = 'A-') and statusdonors = 'Waiting' ORDER BY date(submitdate) DESC"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'A+' OR bloodtype = 'A-') and statusdonors = 'Waiting' ORDER BY datetime(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountA = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where (bloodtype = 'A+' OR bloodtype = 'A-') and statusdonors = 'Waiting'"];
@@ -188,7 +188,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 2)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'B+' OR bloodtype = 'B-') and statusdonors = 'Waiting' ORDER BY date(submitdate) DESC"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'B+' OR bloodtype = 'B-') and statusdonors = 'Waiting' ORDER BY datetime(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountB = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where (bloodtype = 'B+' OR bloodtype = 'B-') and statusdonors = 'Waiting'"];
@@ -199,7 +199,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 3)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'AB+' OR bloodtype = 'AB-') and statusdonors = 'Waiting' ORDER BY date(submitdate) DESC"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'AB+' OR bloodtype = 'AB-') and statusdonors = 'Waiting' ORDER BY datetime(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountAB = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where (bloodtype = 'AB+' OR bloodtype = 'AB-') and statusdonors = 'Waiting'"];
@@ -210,7 +210,7 @@ DonorsDB *db;
     }
     if(segment.selectedSegmentIndex == 4)
     {
-        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'O+' OR bloodtype = 'O-') and statusdonors = 'Waiting' ORDER BY date(submitdate) DESC"];
+        NSString *strShow = [[NSString alloc]initWithFormat:@"select * from donors where (bloodtype = 'O+' OR bloodtype = 'O-') and statusdonors = 'Waiting' ORDER BY datetime(submitdate) DESC"];
         arrMainData = [db showAllDonorsData:strShow];
         
         NSString *strCountO = [[NSString alloc]initWithFormat:@"select count(donorsid) from donors where (bloodtype = 'O+' OR bloodtype = 'O-') and statusdonors = 'Waiting'"];

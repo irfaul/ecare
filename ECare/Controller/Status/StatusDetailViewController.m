@@ -24,7 +24,7 @@
     
     self.view.backgroundColor = [UIColor systemGroupedBackgroundColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleDone target:self action:@selector(okBtn)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(okBtn)];
     self.navigationController.navigationBar.barTintColor = [[util new] primaryColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.presentationController.delegate = self;

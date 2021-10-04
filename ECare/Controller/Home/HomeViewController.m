@@ -151,13 +151,17 @@ NSInteger flag = 0;
     arrMainData = [dbReq showReqData:strNotif];
     
     NSString *statusReq = [[NSString alloc] init];
-    statusReq = [[arrMainData objectAtIndex:arrMainData.count - 1]objectForKey:@"reqstatus"];
+    
+    statusReq = arrMainData.count == 0 ? @"-" : [[arrMainData objectAtIndex:arrMainData.count - 1]objectForKey:@"reqstatus"];
+    
+    NSLog(@"%@", statusReq);
     
     flag++;
     
     if( flag <= 1 ) {
         if([statusReq isEqual:@"Scheduled"]){
             if(isGrantedNotificationAccess) {
+                NSLog(@"granted");
                 UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
                 UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
                 content.title = @"Ecare Notifications";
@@ -168,7 +172,7 @@ NSInteger flag = 0;
                 UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:3 repeats:NO];
                 UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"UYLocalNotification" content:content trigger:trigger];
                 [center addNotificationRequest:request withCompletionHandler:nil];
-            }
+            } NSLog(@"notgranted");
         }
     }
 }

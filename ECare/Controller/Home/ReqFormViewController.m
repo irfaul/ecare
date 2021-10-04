@@ -136,14 +136,14 @@ UIToolbar *toolbar;
     //---------ID VIEW---------------------------------------------------
     
     idText = [[UILabel alloc] init];
-    idText.text = @"ID";
+    idText.text = @"NIK";
     idText.font = [[util new] regularFont:&labelFont];
     idText.textColor = [UIColor darkGrayColor];
     idText.adjustsFontSizeToFitWidth = YES;
     idText.textAlignment = NSTextAlignmentLeft;
 
     userID = [[UITextField alloc] init];
-    userID.placeholder = @"Type your ID ...";
+    userID.placeholder = @"Type your NIK ...";
     userID.font = [[util new] regularFont:&labelFont];
     userID.backgroundColor = [UIColor whiteColor];
     userID.keyboardType = UIKeyboardTypeNumberPad;
@@ -682,7 +682,19 @@ UIToolbar *toolbar;
 }
 
 - (void)cancelReqForm {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Discard Changes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:addAction];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)setConstraint {

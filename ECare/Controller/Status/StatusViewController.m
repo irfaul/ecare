@@ -41,7 +41,7 @@ DonorsDB *dbreq;
 - (void)viewWillAppear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
     
-    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036'"];
+    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036' ORDER BY datetime(submitdate) DESC"];
     
     dbreq = [[DonorsDB alloc]init];
     arrMainData = [[NSMutableArray alloc]init];
@@ -190,7 +190,7 @@ DonorsDB *dbreq;
     
     
     UIAlertAction* okButton = [UIAlertAction
-                               actionWithTitle:@"OK"
+                               actionWithTitle:@"Yes"
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
                                     NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET reqstatus = 'Cancelled' WHERE userid = '19080036'"];
@@ -202,7 +202,7 @@ DonorsDB *dbreq;
                                     }else{
                                         NSLog(@"update failed");
                                     }
-                                    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036'"];
+                                    NSString *strShow = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036' ORDER BY datetime(submitdate) DESC"];
 
                                     //dbreq = [[DonorsDB alloc]init];
                                     self.arrMainData = [[NSMutableArray alloc]init];

@@ -11,7 +11,9 @@
 #import "DonorsDB.h"
 #import "util.h"
 
-@interface HomeViewController () <sendData>
+@interface HomeViewController () <sendData> {
+    BOOL isGrantedNotificationAccess;
+}
 
 @end
 
@@ -19,6 +21,7 @@
 
 UIButton *btnReq;
 DonorsDB *dbReq;
+NSInteger flag = 0;
 
 @synthesize logoApp,titleLabel,reqBtnLabel, countStatus;
 
@@ -29,6 +32,13 @@ DonorsDB *dbReq;
     self.view.backgroundColor = [UIColor whiteColor];
     AppDelegate* shared = (AppDelegate*)[UIApplication sharedApplication].delegate;
     shared.blockRotation=YES;
+    
+    isGrantedNotificationAccess = false;
+    UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        self->isGrantedNotificationAccess = granted;
+    }];
     
     [self setInitComponent];
 }
@@ -134,6 +144,33 @@ DonorsDB *dbReq;
     if (waitingStatus > 0) {
         [btnReq setEnabled:NO];
     } else { [btnReq setEnabled:YES]; }
+    
+    NSString *strNotif = [[NSString alloc]initWithFormat:@"select * from request where userid = '19080036'"];
+    
+    NSMutableArray *arrMainData = [[NSMutableArray alloc]init];
+    arrMainData = [dbReq showReqData:strNotif];
+    
+    NSString *statusReq = [[NSString alloc] init];
+    statusReq = [[arrMainData objectAtIndex:arrMainData.count - 1]objectForKey:@"reqstatus"];
+    
+    flag++;
+    
+    if( flag <= 1 ) {
+        if([statusReq isEqual:@"Scheduled"]){
+            if(isGrantedNotificationAccess) {
+                UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+                UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+                content.title = @"Ecare Notifications";
+                content.subtitle  = @"Your Donor has been scheduled";
+                content.body = @"Go check your donor info in 'Status' tabs";
+                content.sound = [UNNotificationSound defaultSound];
+                
+                UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:3 repeats:NO];
+                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"UYLocalNotification" content:content trigger:trigger];
+                [center addNotificationRequest:request withCompletionHandler:nil];
+            }
+        }
+    }
 }
 
 - (void)btnReqAction:(UIButton *) sender{

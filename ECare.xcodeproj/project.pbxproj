@@ -11,6 +11,7 @@
 		85258FC926F9AA37009C3794 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 85258FC826F9AA25009C3794 /* libsqlite3.tbd */; };
 		856E39E026F42E03003B1949 /* DonorsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 856E39DE26F42E03003B1949 /* DonorsTableViewCell.m */; };
 		856E39E126F42E03003B1949 /* DonorsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 856E39DF26F42E03003B1949 /* DonorsTableViewCell.xib */; };
+		8598EF9A270A886200C49BB4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8598EF98270A884A00C49BB4 /* UserNotifications.framework */; };
 		85B2414426F1B5EC006088A5 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B2414326F1B5EC006088A5 /* PickerViewController.m */; };
 		85B2414926F1B636006088A5 /* Picker.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85B2414826F1B636006088A5 /* Picker.plist */; };
 		85D5DDBB26FACEA100909149 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D5DDBA26FACEA100909149 /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		856E39DD26F42E03003B1949 /* DonorsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DonorsTableViewCell.h; sourceTree = "<group>"; };
 		856E39DE26F42E03003B1949 /* DonorsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DonorsTableViewCell.m; sourceTree = "<group>"; };
 		856E39DF26F42E03003B1949 /* DonorsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonorsTableViewCell.xib; sourceTree = "<group>"; };
+		8598EF98270A884A00C49BB4 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		85B2414226F1B5EC006088A5 /* PickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
 		85B2414326F1B5EC006088A5 /* PickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
 		85B2414826F1B636006088A5 /* Picker.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Picker.plist; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8598EF9A270A886200C49BB4 /* UserNotifications.framework in Frameworks */,
 				85258FC926F9AA37009C3794 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +145,7 @@
 		85258FC726F9AA24009C3794 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8598EF98270A884A00C49BB4 /* UserNotifications.framework */,
 				85258FC826F9AA25009C3794 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;

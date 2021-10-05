@@ -140,6 +140,8 @@ DonorsDB *dbreq;
     
     if([statusReq isEqual:@"Scheduled"] || [statusReq isEqual:@"Cancelled"]){
         cell.btnCancelView.hidden = YES;
+    } else if([statusReq isEqual:@"Waiting"]) {
+        cell.btnCancelView.hidden = NO;
     }
     
     if([statusReq isEqual:@"Waiting"]) {

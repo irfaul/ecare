@@ -136,7 +136,11 @@ DonorsDB *dbreq;
     cell.btnCancelView.layer.masksToBounds = false;
     cell.btnCancelView.layer.cornerRadius = 8.0;
     
+    NSString *reqID = [[NSString alloc] init];
+    reqID = [[arrMainData objectAtIndex:indexPath.row]objectForKey:@"reqid"];
+    
     [cell.btnCancelView addTarget:self action:@selector(btnCancelUpdate:) forControlEvents:UIControlEventTouchUpInside];
+    cell.btnCancelView.tag = [reqID integerValue];
     
     if([statusReq isEqual:@"Scheduled"] || [statusReq isEqual:@"Cancelled"]){
         cell.btnCancelView.hidden = YES;
@@ -183,7 +187,7 @@ DonorsDB *dbreq;
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)btnCancelUpdate:(UIButton *) sender{
+- (void)btnCancelUpdate:(UIButton *)sender {
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:@"Do you want to do this action ?"
                                  message:@"You cannot undo this action."
@@ -195,7 +199,7 @@ DonorsDB *dbreq;
                                actionWithTitle:@"Yes"
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
-                                    NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET reqstatus = 'Cancelled' WHERE userid = '19080036'"];
+        NSString *strUpdate = [[NSString alloc]initWithFormat:@"UPDATE request SET reqstatus = 'Cancelled' WHERE userid = '19080036' and reqid = %li", (long)sender.tag];
 
                                     BOOL st = [dbreq showAllDonorsData:strUpdate];
 

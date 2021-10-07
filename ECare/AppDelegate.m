@@ -73,7 +73,7 @@
  {
     if (self.blockRotation) {
         return UIInterfaceOrientationMaskPortrait;
- }
+    }
      return UIInterfaceOrientationMaskAll;
  }
 
